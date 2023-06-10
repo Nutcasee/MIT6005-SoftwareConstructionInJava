@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="0" hostname="DESKTOP-LNC8732" id="0" name="QuadraticTest" package="warmup" skipped="0" tests="8" time="0.105" timestamp="2023-06-05T04:54:54">
+  <testsuite errors="0" failures="0" hostname="DESKTOP-LNC8732" id="0" name="QuadraticTest" package="warmup" skipped="0" tests="8" time="0.116" timestamp="2023-06-10T01:40:21">
       <properties>
           <property name="ant.library.dir" value="C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib" />
 
@@ -38,7 +38,7 @@
 
           <property name="problem.set" value="ps1" />
 
-          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner warmup.QuadraticTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\TEST-warmup.QuadraticTest.xml crashfile=C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\junitvmwatcher17452435629881923944.properties propsfile=C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\junit7609010572837076066.properties" />
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner warmup.QuadraticTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\TEST-warmup.QuadraticTest.xml crashfile=C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\junitvmwatcher2960907524522517419.properties propsfile=C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\junit12053625493326775174.properties" />
 
           <property name="zipfile" value="my-submission.zip" />
 
@@ -156,27 +156,27 @@
 
       <testcase classname="warmup.QuadraticTest" name="testPositiveRoots" time="0.0" />
 
-      <testcase classname="warmup.QuadraticTest" name="testBothZeroRoots" time="0.001" />
+      <testcase classname="warmup.QuadraticTest" name="testBothZeroRoots" time="0.0" />
 
       <testcase classname="warmup.QuadraticTest" name="testOppositeSignRoots" time="0.0" />
 
       <testcase classname="warmup.QuadraticTest" name="testNegativeRoots" time="0.0" />
 
-      <testcase classname="warmup.QuadraticTest" name="testLargeRoots" time="0.0" />
+      <testcase classname="warmup.QuadraticTest" name="testLargeRoots" time="0.001" />
 
-      <system-out><![CDATA[1 -26 169 0
-1 -9 0 81
-1 -13 40 9
-1 0 0 0
--7 98 -231 3136
-1 10 16 36
-1 0 -2025000000 8100000000
+      <system-out><![CDATA[1 -26 169 0.0
+1 -9 0 20.0
+1 -13 40 2.0
+1 0 0 0.0
+-7 98 -231 784.0
+1 10 16 9.0
+1 0 -2025000000 2.02499994E9
 ]]></system-out>
 
       <system-err><![CDATA[]]></system-err>
 
   </testsuite>
-  <testsuite errors="1" failures="1" hostname="DESKTOP-LNC8732" id="1" name="QuadraticTest" package="warmup.staff" skipped="0" tests="3" time="0.108" timestamp="2023-06-05T04:54:55">
+  <testsuite errors="1" failures="1" hostname="DESKTOP-LNC8732" id="1" name="QuadraticTest" package="warmup.staff" skipped="0" tests="3" time="0.111" timestamp="2023-06-10T01:40:22">
       <properties>
           <property name="ant.library.dir" value="C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib" />
 
@@ -214,7 +214,7 @@
 
           <property name="problem.set" value="ps1" />
 
-          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner warmup.staff.QuadraticTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\TEST-warmup.staff.QuadraticTest.xml crashfile=C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\junitvmwatcher13763059635367998283.properties propsfile=C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\junit5442685538125870678.properties" />
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner warmup.staff.QuadraticTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\TEST-warmup.staff.QuadraticTest.xml crashfile=C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\junitvmwatcher9239305412948711264.properties propsfile=C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\junit4960798786522213572.properties" />
 
           <property name="zipfile" value="my-submission.zip" />
 
@@ -334,9 +334,9 @@
 
       </testcase>
 
-      <testcase classname="warmup.staff.QuadraticTest" name="testComplexRoots" time="0.001">
+      <testcase classname="warmup.staff.QuadraticTest" name="testComplexRoots" time="0.0">
           <error message="The equation doesnt have integer root(s)." type="java.lang.RuntimeException">java.lang.RuntimeException: The equation doesnt have integer root(s).
-	at warmup.Quadratic.roots(Quadratic.java:43)
+	at warmup.Quadratic.roots(Quadratic.java:44)
 	at warmup.staff.QuadraticTest.testComplexRoots(QuadraticTest.java:43)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -345,10 +345,10 @@
 
       </testcase>
 
-      <testcase classname="warmup.staff.QuadraticTest" name="testOneDegenerateRoot" time="0.001" />
+      <testcase classname="warmup.staff.QuadraticTest" name="testOneDegenerateRoot" time="0.0" />
 
-      <system-out><![CDATA[6 -5 1 1
-1 -2 2 -4
+      <system-out><![CDATA[6 -5 1 0.0
+1 -2 2 -1.0
 ]]></system-out>
 
       <system-err><![CDATA[]]></system-err>

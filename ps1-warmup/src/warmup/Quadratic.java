@@ -35,18 +35,16 @@ public class Quadratic {
                 return oneRoot;
             }
         }
-//        long determinant = B * B - 4 * A * C;
+        long determinant = B * B - 4 * A * C;
 //        long determinant = b * b - 4 * a * c;
-        float determinantDivideByFour = b * b / 4 - a * c;
-        System.out.println(a + " " + b + " " + c + " " + determinantDivideByFour);
+        System.out.println(a + " " + b + " " + c + " " + determinant);
         
-        if (determinantDivideByFour < 0) {
+        if (determinant < 0) {
             throw new RuntimeException("The equation doesnt have integer root(s).");
         }
         
-        // as if roots, root2 are integer, 
-        root1 = (int) Math.round((-b + 2 * Math.sqrt(determinantDivideByFour)) / (2 * a));
-        root2 = (int) Math.round((-b - 2 * Math.sqrt(determinantDivideByFour)) / (2 * a));
+        root1 = (int) (-b + Math.sqrt(determinant)) / (2 * a);
+        root2 = (int) (-b - Math.sqrt(determinant)) / (2 * a);
 
         twoRoots.add(root1);
         twoRoots.add(root2);

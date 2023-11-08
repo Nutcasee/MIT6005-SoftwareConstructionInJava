@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="0" hostname="DESKTOP-LNC8732" id="0" name="QuadraticTest" package="warmup" skipped="0" tests="8" time="0.104" timestamp="2023-06-10T05:24:58">
+  <testsuite errors="0" failures="0" hostname="DESKTOP-LNC8732" id="0" name="QuadraticTest" package="warmup" skipped="0" tests="8" time="0.132" timestamp="2023-11-01T14:47:05">
       <properties>
           <property name="ant.library.dir" value="C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib" />
 
@@ -12,7 +12,7 @@
 
           <property name="which.tests.ran" value="BETA + FINAL" />
 
-          <property name="java.class.path" value="C:\Users\tuvue\eclipse-workspace\ps1-warmup\lib\junit-4.12.jar;C:\Users\tuvue\eclipse-workspace\ps1-warmup\lib\hamcrest-core-1.3.jar;C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\bin-student;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant-launcher.jar;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant.jar;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant-junit.jar;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant-junit4.jar" />
+          <property name="java.class.path" value="C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\lib\junit-4.12.jar;C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\lib\hamcrest-core-1.3.jar;C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\.grader\bin-student;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant-launcher.jar;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant.jar;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant-junit.jar;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant-junit4.jar" />
 
           <property name="project.name" value="ps1-warmup" />
 
@@ -24,21 +24,21 @@
 
           <property name="java.vendor.url" value="https://adoptium.net/" />
 
+          <property name="os.name" value="Windows 10" />
+
           <property name="java.vm.specification.version" value="17" />
 
           <property name="build.sysclasspath" value="ignore" />
 
-          <property name="os.name" value="Windows 10" />
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
 
           <property name="user.country" value="US" />
-
-          <property name="sun.java.launcher" value="SUN_STANDARD" />
 
           <property name="sun.boot.library.path" value="C:\Users\tuvue\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.6.v20230204-1729\jre\bin" />
 
           <property name="problem.set" value="ps1" />
 
-          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner warmup.QuadraticTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\TEST-warmup.QuadraticTest.xml crashfile=C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\junitvmwatcher13010429280023788742.properties propsfile=C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\junit3976976798431678722.properties" />
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner warmup.QuadraticTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\.grader\TEST-warmup.QuadraticTest.xml crashfile=C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\.grader\junitvmwatcher17885629509077353414.properties propsfile=C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\.grader\junit11689232172886541287.properties" />
 
           <property name="zipfile" value="my-submission.zip" />
 
@@ -60,7 +60,7 @@
 
           <property name="java.home" value="C:\Users\tuvue\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.6.v20230204-1729\jre" />
 
-          <property name="basedir" value="C:\Users\tuvue\eclipse-workspace\ps1-warmup" />
+          <property name="basedir" value="C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup" />
 
           <property name="file.separator" value="\" />
 
@@ -82,11 +82,9 @@
 
           <property name="java.runtime.version" value="17.0.6+10" />
 
-          <property name="java.security.manager" value="allow" />
-
           <property name="user.name" value="tuvue" />
 
-          <property name="ant.file" value="C:\Users\tuvue\eclipse-workspace\ps1-warmup\grader.xml" />
+          <property name="ant.file" value="C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\grader.xml" />
 
           <property name="path.separator" value=";" />
 
@@ -114,7 +112,7 @@
 
           <property name="java.version" value="17.0.6" />
 
-          <property name="user.dir" value="C:\Users\tuvue\eclipse-workspace\ps1-warmup" />
+          <property name="user.dir" value="C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup" />
 
           <property name="grader.dir" value=".grader" />
 
@@ -132,7 +130,7 @@
 
           <property name="final.grading" value="true" />
 
-          <property name="java.library.path" value="C:\Users\tuvue\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.6.v20230204-1729\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Users/tuvue/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502/jre/bin/server;C:/Users/tuvue/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502/jre/bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.7.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.372.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-11.0.19.7-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;d:\Program Files\Git\cmd;C:\Program Files\PuTTY\;C:\Users\tuvue\AppData\Local\Microsoft\WindowsApps;d:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2023.1\bin;d:\Users\tuvue\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\tuvue\AppData\Local\Coursier\data\bin;C:\Users\tuvue\AppData\Local\GitHubDesktop\bin;C:\Users\tuvue\AppData\Local\Coursier\cache\arc\https\github.com\AdoptOpenJDK\openjdk11-binaries\releases\download\jdk-11%252B28\OpenJDK11-jdk_x64_windows_hotspot_11_28.zip\jdk-11+28\bin;C:\Users\tuvue\eclipse\java-2023-032\eclipse;;." />
+          <property name="java.library.path" value="C:\Users\tuvue\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.6.v20230204-1729\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Users/tuvue/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502/jre/bin/server;C:/Users/tuvue/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502/jre/bin;C:\Program Files\Eclipse Adoptium\jre-17.0.7.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.7.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.372.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-11.0.19.7-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Git\cmd;C:\Program Files\TMC-cli;C:\chromedriver-win64;C:\Users\tuvue\AppData\Local\Programs\Python\Python311;C:\Program Files\Google\Chrome\Application;C:\Users\tuvue\AppData\Local\Programs\Python\Python311\Scripts;C:\Program Files\Calibre2\;C:\Users\tuvue\Downloads\Chromedriver;C:\Program Files\Eclipse Adoptium\jre-17.0.7.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.7.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.372.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-11.0.19.7-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Git\cmd;C:\Program Files\TMC-cli;C:\Users\tuvue\Downloads\Chromedriver;C:\Users\tuvue\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\tuvue\eclipse\java-2023-032\eclipse;;." />
 
           <property name="java.vendor" value="Eclipse Adoptium" />
 
@@ -148,7 +146,7 @@
 
       </properties>
 
-      <testcase classname="warmup.QuadraticTest" name="testOneRoot" time="0.001" />
+      <testcase classname="warmup.QuadraticTest" name="testOneRoot" time="0.0" />
 
       <testcase classname="warmup.QuadraticTest" name="testAssertionsEnabled" time="0.0" />
 
@@ -160,7 +158,7 @@
 
       <testcase classname="warmup.QuadraticTest" name="testOppositeSignRoots" time="0.0" />
 
-      <testcase classname="warmup.QuadraticTest" name="testNegativeRoots" time="0.001" />
+      <testcase classname="warmup.QuadraticTest" name="testNegativeRoots" time="0.0" />
 
       <testcase classname="warmup.QuadraticTest" name="testLargeRoots" time="0.0" />
 
@@ -176,7 +174,7 @@
       <system-err><![CDATA[]]></system-err>
 
   </testsuite>
-  <testsuite errors="1" failures="1" hostname="DESKTOP-LNC8732" id="1" name="QuadraticTest" package="warmup.staff" skipped="0" tests="3" time="0.108" timestamp="2023-06-10T05:24:59">
+  <testsuite errors="1" failures="1" hostname="DESKTOP-LNC8732" id="1" name="QuadraticTest" package="warmup.staff" skipped="0" tests="3" time="0.116" timestamp="2023-11-01T14:47:06">
       <properties>
           <property name="ant.library.dir" value="C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib" />
 
@@ -188,7 +186,7 @@
 
           <property name="which.tests.ran" value="BETA + FINAL" />
 
-          <property name="java.class.path" value="C:\Users\tuvue\eclipse-workspace\ps1-warmup\lib\junit-4.12.jar;C:\Users\tuvue\eclipse-workspace\ps1-warmup\lib\hamcrest-core-1.3.jar;C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\bin-tests-final;C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\bin-student;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant-launcher.jar;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant.jar;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant-junit.jar;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant-junit4.jar" />
+          <property name="java.class.path" value="C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\lib\junit-4.12.jar;C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\lib\hamcrest-core-1.3.jar;C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\.grader\bin-tests-final;C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\.grader\bin-student;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant-launcher.jar;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant.jar;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant-junit.jar;C:\Users\tuvue\.p2\pool\plugins\org.apache.ant_1.10.12.v20211102-1452\lib\ant-junit4.jar" />
 
           <property name="project.name" value="ps1-warmup" />
 
@@ -200,21 +198,21 @@
 
           <property name="java.vendor.url" value="https://adoptium.net/" />
 
+          <property name="os.name" value="Windows 10" />
+
           <property name="java.vm.specification.version" value="17" />
 
           <property name="build.sysclasspath" value="ignore" />
 
-          <property name="os.name" value="Windows 10" />
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
 
           <property name="user.country" value="US" />
-
-          <property name="sun.java.launcher" value="SUN_STANDARD" />
 
           <property name="sun.boot.library.path" value="C:\Users\tuvue\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.6.v20230204-1729\jre\bin" />
 
           <property name="problem.set" value="ps1" />
 
-          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner warmup.staff.QuadraticTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\TEST-warmup.staff.QuadraticTest.xml crashfile=C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\junitvmwatcher17078803921743219259.properties propsfile=C:\Users\tuvue\eclipse-workspace\ps1-warmup\.grader\junit4363067580885034914.properties" />
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner warmup.staff.QuadraticTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\.grader\TEST-warmup.staff.QuadraticTest.xml crashfile=C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\.grader\junitvmwatcher11943017052496539692.properties propsfile=C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\.grader\junit6458864962946000666.properties" />
 
           <property name="zipfile" value="my-submission.zip" />
 
@@ -236,7 +234,7 @@
 
           <property name="java.home" value="C:\Users\tuvue\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.6.v20230204-1729\jre" />
 
-          <property name="basedir" value="C:\Users\tuvue\eclipse-workspace\ps1-warmup" />
+          <property name="basedir" value="C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup" />
 
           <property name="file.separator" value="\" />
 
@@ -258,11 +256,9 @@
 
           <property name="java.runtime.version" value="17.0.6+10" />
 
-          <property name="java.security.manager" value="allow" />
-
           <property name="user.name" value="tuvue" />
 
-          <property name="ant.file" value="C:\Users\tuvue\eclipse-workspace\ps1-warmup\grader.xml" />
+          <property name="ant.file" value="C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup\grader.xml" />
 
           <property name="path.separator" value=";" />
 
@@ -290,7 +286,7 @@
 
           <property name="java.version" value="17.0.6" />
 
-          <property name="user.dir" value="C:\Users\tuvue\eclipse-workspace\ps1-warmup" />
+          <property name="user.dir" value="C:\Users\tuvue\Downloads\callOfTheWild\MIT6005-SoftwareConstructionInJava\ps1-warmup" />
 
           <property name="grader.dir" value=".grader" />
 
@@ -308,7 +304,7 @@
 
           <property name="final.grading" value="true" />
 
-          <property name="java.library.path" value="C:\Users\tuvue\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.6.v20230204-1729\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Users/tuvue/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502/jre/bin/server;C:/Users/tuvue/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502/jre/bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.7.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.372.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-11.0.19.7-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;d:\Program Files\Git\cmd;C:\Program Files\PuTTY\;C:\Users\tuvue\AppData\Local\Microsoft\WindowsApps;d:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2023.1\bin;d:\Users\tuvue\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\tuvue\AppData\Local\Coursier\data\bin;C:\Users\tuvue\AppData\Local\GitHubDesktop\bin;C:\Users\tuvue\AppData\Local\Coursier\cache\arc\https\github.com\AdoptOpenJDK\openjdk11-binaries\releases\download\jdk-11%252B28\OpenJDK11-jdk_x64_windows_hotspot_11_28.zip\jdk-11+28\bin;C:\Users\tuvue\eclipse\java-2023-032\eclipse;;." />
+          <property name="java.library.path" value="C:\Users\tuvue\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.6.v20230204-1729\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Users/tuvue/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502/jre/bin/server;C:/Users/tuvue/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502/jre/bin;C:\Program Files\Eclipse Adoptium\jre-17.0.7.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.7.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.372.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-11.0.19.7-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Git\cmd;C:\Program Files\TMC-cli;C:\chromedriver-win64;C:\Users\tuvue\AppData\Local\Programs\Python\Python311;C:\Program Files\Google\Chrome\Application;C:\Users\tuvue\AppData\Local\Programs\Python\Python311\Scripts;C:\Program Files\Calibre2\;C:\Users\tuvue\Downloads\Chromedriver;C:\Program Files\Eclipse Adoptium\jre-17.0.7.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.7.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.372.7-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-11.0.19.7-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Git\cmd;C:\Program Files\TMC-cli;C:\Users\tuvue\Downloads\Chromedriver;C:\Users\tuvue\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\tuvue\eclipse\java-2023-032\eclipse;;." />
 
           <property name="java.vendor" value="Eclipse Adoptium" />
 
@@ -324,7 +320,7 @@
 
       </properties>
 
-      <testcase classname="warmup.staff.QuadraticTest" name="testRealRoots" time="0.006">
+      <testcase classname="warmup.staff.QuadraticTest" name="testRealRoots" time="0.016">
           <failure message="expected:&lt;[]&gt; but was:&lt;[0]&gt;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: expected:&lt;[]&gt; but was:&lt;[0]&gt;
 	at warmup.staff.QuadraticTest.testRealRoots(QuadraticTest.java:37)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

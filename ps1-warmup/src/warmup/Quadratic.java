@@ -39,9 +39,9 @@ public class Quadratic {
 //        long determinant = b * b - 4 * a * c;
         System.out.println(a + " " + b + " " + c + " " + determinant);
         
-        if (determinant < 0) {
-            throw new RuntimeException("The equation doesnt have integer root(s).");
-        }
+//        if (determinant < 0) {
+//            throw new RuntimeException("The equation doesnt have integer root(s).");
+//        }
         
         root1 = (int) (-b + Math.sqrt(determinant)) / (2 * a);
         root2 = (int) (-b - Math.sqrt(determinant)) / (2 * a);

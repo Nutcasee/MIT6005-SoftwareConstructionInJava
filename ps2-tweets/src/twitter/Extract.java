@@ -72,7 +72,7 @@ public class Extract {
         
         Set<String> getUsers = new HashSet<String>();
         
-        String regex = "^@[A-Za-z0-9_-]+$";
+        String regex = "([\\W&&[^-]]*)@[\\w-]+([\\\\W&&[^-]]*)"; //"(\\W&&[^-]*)@(\\w&&-*)$";
         Pattern pattern = Pattern.compile(regex);
         
         for (Tweet tweet : tweets) {

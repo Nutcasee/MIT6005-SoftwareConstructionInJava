@@ -76,14 +76,17 @@ public class Extract {
         Pattern pattern = Pattern.compile(regex);
         
         for (Tweet tweet : tweets) {
-            String author = tweet.getAuthor();
-            CharSequence charSeq = tweet.getAuthor();
-            Matcher m = pattern.matcher(charSeq);
-            
-            if (m.matches()) {
-                getUsers.add(author);
-            }             
-        } 
+            String text = tweet.getText();
+            String[] words = text.split(" ");
+            for (String word : words) {
+                CharSequence charSeq = word;
+                Matcher m = pattern.matcher(charSeq);
+                
+                if (m.matches()) {
+                    getUsers.add(word);
+                }             
+            }           
+        }
         return getUsers;
     }
 

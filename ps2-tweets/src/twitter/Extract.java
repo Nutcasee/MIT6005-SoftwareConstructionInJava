@@ -70,9 +70,15 @@ public class Extract {
             throw new IllegalArgumentException("tweets is empty");
         }
         
+        Set<String> users = new HashSet<String>();
+        for (Tweet tweet : tweets) {
+            users.add(tweet.getAuthor());
+        }
+        
         Set<String> getUsers = new HashSet<String>();
         
-        String regex = "([\\W&&[^-]]*)@[\\w-]+([\\\\W&&[^-]]*)"; //"(\\W&&[^-]*)@(\\w&&-*)$";
+        // (\w+(-))@(\w+(-*))+
+        String regex = "([^\\w-]*)@[\\w-]+([^\\w-]*)"; //"(\\W&&[^-]*)@(\\w&&-*)$";
         Pattern pattern = Pattern.compile(regex);
         
         for (Tweet tweet : tweets) {

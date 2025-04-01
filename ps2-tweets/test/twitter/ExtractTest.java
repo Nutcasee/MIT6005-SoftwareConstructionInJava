@@ -25,7 +25,7 @@ public class ExtractTest {
     private static final Tweet tweet1 = new Tweet(1, "alyssa", "is it reasonable to talk about rivest so much?", d1);
     private static final Tweet tweet2 = new Tweet(2, "bbitdiddle", "rivest talk in 30 minutes #hype", d2);
 
-    private static final Tweet tweet3 = new Tweet(3, "csad", " @ALyssa case insensitive", d3);
+    private static final Tweet tweet3 = new Tweet(3, "csad", " sdf...@ALyssa case insensitive", d3);
     private static final Tweet tweet4 = new Tweet(4, "ddas", "yes.@eess.com", d4);
     private static final Tweet tweet5 = new Tweet(5, "eess", "yes @ddas ", d5);
     private static final Tweet tweet6 = new Tweet(6, "fran", "not@eess.com sdlfsdf", d6);

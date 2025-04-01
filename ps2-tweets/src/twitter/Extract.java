@@ -78,27 +78,28 @@ public class Extract {
         Set<String> getUsers = new HashSet<String>();
         
         // (\w+(-))@(\w+(-*))+
-        String regex = "([^\\w-]*)@[\\w-]+([^\\w-]*)"; //"(\\W&&[^-]*)@(\\w&&-*)$";
+        String regex = ".*([^\\w-]*)@[\\w-]+([^\\w-]*)"; //"(\\W&&[^-]*)@(\\w&&-*)$";
         Pattern pattern = Pattern.compile(regex);
         
         for (Tweet tweet : tweets) {
             String text = tweet.getText();
             
-            System.out.println("text is: " + text);
+//            System.out.println("text is: " + text);
             
-            String[] words = text.split(" ");
-            
-            System.out.println("words are: " + Arrays.toString(words));
+            String[] words = text.split(" ");            
+//            System.out.println("words are: " + Arrays.toString(words));
             for (String word : words) {
-//                System.out.println("word IS: " + word);
+                System.out.println("word IS: " + word);
                 CharSequence charSeq = word;
                 Matcher m = pattern.matcher(charSeq);
                 
                 if (m.matches()) {
-                    for (String user : users) {
-                        
-                        System.out.println("word is: " + word);
-                        if (user.equalsIgnoreCase(word.substring(1))) {
+                    String afterAt = word.split("@")[1];
+                    System.out.println("afterAt IS: " + afterAt);
+                    String refinedWord = afterAt.split("[^\\w-]")[0];
+                    System.out.println("refinedWord IS: " + refinedWord);
+                    for (String user : users) {                        
+                        if (user.equalsIgnoreCase(refinedWord)) {
                             System.out.println("USER are: " + user);
                             getUsers.add(user);
                         }

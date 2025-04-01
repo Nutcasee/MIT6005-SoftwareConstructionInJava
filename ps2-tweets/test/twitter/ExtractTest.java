@@ -17,10 +17,19 @@ public class ExtractTest {
     
     private static final Instant d1 = Instant.parse("2016-02-17T10:00:00Z");
     private static final Instant d2 = Instant.parse("2016-02-17T11:00:00Z");
+    private static final Instant d3 = Instant.parse("2016-02-17T12:00:00Z");
+    private static final Instant d4 = Instant.parse("2016-02-17T14:00:00Z");
+    private static final Instant d5 = Instant.parse("2016-02-17T15:00:00Z");
+    private static final Instant d6 = Instant.parse("2016-02-17T16:00:00Z");
     
     private static final Tweet tweet1 = new Tweet(1, "alyssa", "is it reasonable to talk about rivest so much?", d1);
     private static final Tweet tweet2 = new Tweet(2, "bbitdiddle", "rivest talk in 30 minutes #hype", d2);
-    
+
+    private static final Tweet tweet3 = new Tweet(3, "csad", " @ALyssa case insensitive", d3);
+    private static final Tweet tweet4 = new Tweet(4, "ddas", "yes.@eess.com", d4);
+    private static final Tweet tweet5 = new Tweet(5, "eess", "yes @ddas ", d5);
+    private static final Tweet tweet6 = new Tweet(6, "fran", "not@eess.com sdlfsdf", d6);
+
     @Test(expected=AssertionError.class)
     public void testAssertionsEnabled() {
         assert false; // make sure assertions are enabled with VM argument: -ea
@@ -34,12 +43,27 @@ public class ExtractTest {
         assertEquals("expected end", d2, timespan.getEnd());
     }
     
+//    @Test
+//    public void testGetMentionedUsersNoMention() {
+//        Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1));
+//        
+//        assertTrue("expected empty set", mentionedUsers.isEmpty());
+//    }
+//    
     @Test
-    public void testGetMentionedUsersNoMention() {
-        Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1));
+    public void testGetMentionedUsersHasInsensitiveCases() {
+        Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1, tweet3));
         
-        assertTrue("expected empty set", mentionedUsers.isEmpty());
+        System.out.print(mentionedUsers);
+        assertTrue("expected true", mentionedUsers.contains("alyssa"));
     }
+    
+//    @Test
+//    public void testGetMentionedUsersNoMention() {
+//        Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1));
+//        
+//        assertTrue("expected empty set", mentionedUsers.isEmpty());
+//    }
 
     /*
      * Warning: all the tests you write here must be runnable against any

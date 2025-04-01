@@ -2,7 +2,7 @@ package twitter;
 
 import java.util.List;
 import java.util.Set;
-
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -66,9 +66,9 @@ public class Extract {
      */
     public static Set<String> getMentionedUsers(List<Tweet> tweets) {
 //        throw new RuntimeException("not implemented");
-        if (tweets == null) {
-            throw new IllegalArgumentException("tweets is empty");
-        }
+//        if (tweets == null) {
+//            throw new IllegalArgumentException("tweets is empty");
+//        }
         
         Set<String> users = new HashSet<String>();
         for (Tweet tweet : tweets) {
@@ -83,13 +83,26 @@ public class Extract {
         
         for (Tweet tweet : tweets) {
             String text = tweet.getText();
+            
+            System.out.println("text is: " + text);
+            
             String[] words = text.split(" ");
+            
+            System.out.println("words are: " + Arrays.toString(words));
             for (String word : words) {
+//                System.out.println("word IS: " + word);
                 CharSequence charSeq = word;
                 Matcher m = pattern.matcher(charSeq);
                 
                 if (m.matches()) {
-                    getUsers.add(word);
+                    for (String user : users) {
+                        
+                        System.out.println("word is: " + word);
+                        if (user.equalsIgnoreCase(word.substring(1))) {
+                            System.out.println("USER are: " + user);
+                            getUsers.add(user);
+                        }
+                    }
                 }             
             }           
         }

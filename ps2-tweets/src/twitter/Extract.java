@@ -65,42 +65,43 @@ public class Extract {
      *         include a username at most once.
      */
     public static Set<String> getMentionedUsers(List<Tweet> tweets) {
-//        throw new RuntimeException("not implemented");
-//        if (tweets == null) {
-//            throw new IllegalArgumentException("tweets is empty");
-//        }
-        
-        Set<String> users = new HashSet<String>();
+        Set<String> users = new HashSet<>();
         for (Tweet tweet : tweets) {
             users.add(tweet.getAuthor());
         }
         System.out.println("users are: " + users);
         
         
-        Set<String> getUsers = new HashSet<String>();
+        Set<String> getUsers = new HashSet<>();
         
         //"([^\\w-]*)@[\\w-]+([^\\w-]*)"; //"(\\W&&[^-]*)@(\\w&&-*)$";
         // (\w+(-))@(\w+(-*))+
-        String regex = "(?<![\\w-])@[\\w-]+(?![\\w-])"; 
-        Pattern pattern = Pattern.compile(regex);
-        
+        String regex = "@([a-zA-Z0-9_-]+)"; 
+        Pattern pattern = Pattern.compile(regex);        
+
         for (Tweet tweet : tweets) {
             String text = tweet.getText();
             System.out.println("text is: " + text);
             
-            Matcher match = pattern.matcher(text);
+            Matcher matcher = pattern.matcher(text);
             
-            if (match.find()) {
-                String afterAt = text.split("@")[1];
-                System.out.println("afterAt IS: " + afterAt);
-                String refinedWord = afterAt.split("[^\\w-]")[0];
-                System.out.println("refinedWord IS: " + refinedWord);
-                for (String user : users) {                        
-                    if (user.equalsIgnoreCase(refinedWord)) {
-                        System.out.println("USER is: " + user);
-                        getUsers.add(user);
-                    }
-                }
+            while (matcher.find()) {
+                System.out.println("match.group IS: " + matcher.group(1));
+//                String[] splitMatch = text.split("[^\\w-@]");
+//                for (String m: splitMatch) {
+//                    System.out.println("it is " +m);
+//                }
+                getUsers.add(matcher.group(1));
+//                String afterAt = text.split("@")[1];
+//                System.out.println("afterAt IS: " + afterAt);
+//                String refinedWord = afterAt.split("[^\\w-]")[0];
+//                System.out.println("refinedWord IS: " + refinedWord);
+//                for (String user : users) {                        
+//                    if (user.equalsIgnoreCase(refinedWord)) {
+//                        System.out.println("USER is: " + user);
+//                        getUsers.add(user);
+//                    }
+//                }
             }
         }
         return getUsers;        

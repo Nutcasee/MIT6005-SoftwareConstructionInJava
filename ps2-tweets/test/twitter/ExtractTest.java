@@ -26,8 +26,8 @@ public class ExtractTest {
     private static final Tweet tweet2 = new Tweet(2, "bbitdiddle", "rivest talk in 30 minutes #hype", d2);
 
     private static final Tweet tweet3 = new Tweet(3, "csad", "@ALyssa insensitive", d3);
-    private static final Tweet tweet4 = new Tweet(4, "ddas", "yes.@eess.com", d4);
-    private static final Tweet tweet5 = new Tweet(5, "eess", "yes @ddas ", d5);
+    private static final Tweet tweet4 = new Tweet(4, "ddas", "\"Hello @eess, welcome to @alyssa!\"", d4);
+    private static final Tweet tweet5 = new Tweet(5, "eess", "yes @ddas,  sdfjsdl @alyssa ", d5);
     private static final Tweet tweet6 = new Tweet(6, "fran", "not@alyssa sdlfsdf", d6);
 
     @Test(expected = AssertionError.class)

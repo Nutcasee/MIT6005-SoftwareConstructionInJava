@@ -74,42 +74,62 @@ public class Extract {
         for (Tweet tweet : tweets) {
             users.add(tweet.getAuthor());
         }
+        System.out.println("users are: " + users);
+        
         
         Set<String> getUsers = new HashSet<String>();
         
+        //"([^\\w-]*)@[\\w-]+([^\\w-]*)"; //"(\\W&&[^-]*)@(\\w&&-*)$";
         // (\w+(-))@(\w+(-*))+
-        String regex = ".*([^\\w-]*)@[\\w-]+([^\\w-]*)"; //"(\\W&&[^-]*)@(\\w&&-*)$";
+        String regex = "(?<![\\w-])@[\\w-]+(?![\\w-])"; 
         Pattern pattern = Pattern.compile(regex);
         
         for (Tweet tweet : tweets) {
             String text = tweet.getText();
+            System.out.println("text is: " + text);
             
-//            System.out.println("text is: " + text);
+            Matcher match = pattern.matcher(text);
             
-            String[] words = text.split(" ");            
-//            System.out.println("words are: " + Arrays.toString(words));
-            for (String word : words) {
-                System.out.println("word IS: " + word);
-                CharSequence charSeq = word;
-                Matcher m = pattern.matcher(charSeq);
-                
-                if (m.matches()) {
-                    String afterAt = word.split("@")[1];
-                    System.out.println("afterAt IS: " + afterAt);
-                    String refinedWord = afterAt.split("[^\\w-]")[0];
-                    System.out.println("refinedWord IS: " + refinedWord);
-                    for (String user : users) {                        
-                        if (user.equalsIgnoreCase(refinedWord)) {
-                            System.out.println("USER are: " + user);
-                            getUsers.add(user);
-                        }
+            if (match.find()) {
+                String afterAt = text.split("@")[1];
+                System.out.println("afterAt IS: " + afterAt);
+                String refinedWord = afterAt.split("[^\\w-]")[0];
+                System.out.println("refinedWord IS: " + refinedWord);
+                for (String user : users) {                        
+                    if (user.equalsIgnoreCase(refinedWord)) {
+                        System.out.println("USER is: " + user);
+                        getUsers.add(user);
                     }
-                }             
-            }           
+                }
+            }
         }
-        return getUsers;
+        return getUsers;        
     }
 
+//      System.out.println("text is: " + text);
+        
+//      String[] words = text.split(" ");            
+//      System.out.println("words are: " + Arrays.toString(words));
+      
+//      for (String word : words) {
+//          System.out.println("word IS: " + word);
+//          CharSequence charSeq = word;
+//          Matcher m = pattern.matcher(charSeq);
+//          
+//          if (m.matches()) {
+//              String afterAt = word.split("@")[1];
+//              System.out.println("afterAt IS: " + afterAt);
+//              String refinedWord = afterAt.split("[^\\w-]")[0];
+//              System.out.println("refinedWord IS: " + refinedWord);
+//              for (String user : users) {                        
+//                  if (user.equalsIgnoreCase(refinedWord)) {
+//                      System.out.println("USER are: " + user);
+//                      getUsers.add(user);
+//                  }
+//              }
+//          }             
+//      }           
+//  }
     /* Copyright (c) 2007-2016 MIT 6.005 course staff, all rights reserved.
      * Redistribution of original or derived work requires explicit permission.
      * Don't post any of this code on the web or to a public Github repository.

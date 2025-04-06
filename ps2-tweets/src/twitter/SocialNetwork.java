@@ -2,9 +2,11 @@ package twitter;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * SocialNetwork provides methods that operate on a social network.
@@ -44,7 +46,14 @@ public class SocialNetwork {
         Map<String, Set<String>> followWho = new HashMap<>();
         
         for (Tweet tweet : tweets) {
-            followWho.put(tweet.getAuthor(), Extract.getMentionedUsers(Arrays.asList(tweet)));
+            Set<String> beFollowed = Extract.getMentionedUsers(Arrays.asList(tweet));
+            
+            if (!beFollowed.isEmpty()) {
+                if (!followWho.containsKey(tweet.getAuthor())) {
+                    followWho.put(tweet.getAuthor(), beFollowed);
+                }
+                followWho.get(tweet.getAuthor()).addAll(beFollowed);
+            }                
         }
         return followWho;
     }
@@ -59,7 +68,20 @@ public class SocialNetwork {
      *         descending order of follower count.
      */
     public static List<String> influencers(Map<String, Set<String>> followsGraph) {
-        throw new RuntimeException("not implemented");
+//        throw new RuntimeException("not implemented");
+        Map<String, Integer> countFollower = new HashMap<>();
+        
+        for ( Set<String> beFolloweds : followsGraph.values()) {
+            for (String beFollowed : beFolloweds) {
+                countFollower.put(beFollowed, countFollower.getOrDefault(beFollowed, 0) + 1);
+            }
+        }
+        
+        return countFollower.entrySet()
+            .stream()
+            .sorted((a,b) -> b.getValue().compareTo(a.getValue()))
+            .map(Map.Entry::getKey)
+            .collect(Collectors.toList()));
     }
 
     /* Copyright (c) 2007-2016 MIT 6.005 course staff, all rights reserved.

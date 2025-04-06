@@ -29,13 +29,13 @@ public class SocialNetworkTest {
         assertTrue("expected empty graph", followsGraph.isEmpty());
     }
     
-//    @Test
-//    public void testInfluencersEmpty() {
-//        Map<String, Set<String>> followsGraph = new HashMap<>();
-//        List<String> influencers = SocialNetwork.influencers(followsGraph);
-//        
-//        assertTrue("expected empty list", influencers.isEmpty());
-//    }
+    @Test
+    public void testInfluencersEmpty() {
+        Map<String, Set<String>> followsGraph = new HashMap<>();
+        List<String> influencers = SocialNetwork.influencers(followsGraph);
+        
+        assertTrue("expected empty list", influencers.isEmpty());
+    }
 
     /*
      * Warning: all the tests you write here must be runnable against any

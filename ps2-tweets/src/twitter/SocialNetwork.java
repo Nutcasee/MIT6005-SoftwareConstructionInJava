@@ -55,6 +55,9 @@ public class SocialNetwork {
                 followWho.get(tweet.getAuthor()).addAll(beFollowed);
             }                
         }
+        
+        System.out.println("followWho: " + followWho.toString());
+        
         return followWho;
     }
 

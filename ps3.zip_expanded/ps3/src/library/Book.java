@@ -112,23 +112,22 @@ public class Book {
          if (this == that) {
              return true;
          }
-         if (that == null || that.getClass() != Book.class) {
+         if (that == null || !that.getClass().isInstance(Book)) {
              return false;
          } 
          
          Book obj = (Book) that;
          return obj.title.equals(title) && obj.authors.equals(authors)
-                 && obj.year == year;
-         
+                 && obj.year == year;         
      }
      
      @Override
      public int hashCode() {
 //         throw new RuntimeException("not implemented yet");
-         int titleHC = title.hashCode();
-         int authorsHC = titleHC * 31 + authors.hashCode();
-         int yearHC = authorsHC * 31 + Integer.hashCode(year);
-         return yearHC;
+         int result = title.hashCode();
+         int result = result * 31 + authors.hashCode();
+         int result = result * 31 + Integer.hashCode(year);
+         return result;
      }
 
 

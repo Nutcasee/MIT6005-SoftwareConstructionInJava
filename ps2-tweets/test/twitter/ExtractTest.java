@@ -43,20 +43,20 @@ public class ExtractTest {
         assertEquals("expected end", d2, timespan.getEnd());
     }
 
-//    @Test
-//    public void testGetMentionedUsersNoMention() {
-//        Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1));
-//        
-//        assertTrue("expected empty set", mentionedUsers.isEmpty());
-//    }
-//    
-//      @Test
-//      public void testGetMentionedUsersHasInsensitiveCases() {
-//          Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1, tweet3));
-//        
-//          System.out.print(mentionedUsers);
-//          assertTrue("expected true", mentionedUsers.contains("alyssa"));
-//      }
+    @Test
+    public void testGetMentionedUsersNoMention() {
+        Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1));
+        
+        assertTrue("expected empty set", mentionedUsers.isEmpty());
+    }
+    
+      @Test
+      public void testGetMentionedUsersHasInsensitiveCases() {
+          Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1, tweet3));
+        
+          System.out.print(mentionedUsers);
+          assertTrue("expected true", mentionedUsers.contains("alyssa"));
+      }
         @Test
         public void testGetMentionedUsersHasvalidCharacterBeforeAtAndAfter() {
             Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1, tweet4, tweet5));
@@ -65,13 +65,13 @@ public class ExtractTest {
             assertTrue("expected true", mentionedUsers.contains("eess"));
         }
 
-//      @Test
-//      public void testGetMentionedUsersHasInvalidCharacterBeforeAt() {
-//          Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1, tweet6));
-//          
-//          System.out.print(mentionedUsers);
-//          assertTrue("expected empty set", mentionedUsers.isEmpty());
-//      }
+      @Test
+      public void testGetMentionedUsersHasInvalidCharacterBeforeAt() {
+          Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweet1, tweet6));
+          
+          System.out.print(mentionedUsers);
+          assertTrue("expected empty set", mentionedUsers.isEmpty());
+      }
 
     /*
      * Warning: all the tests you write here must be runnable against any Extract

@@ -16,8 +16,11 @@ public class Book {
     // TODO: rep
     
     // TODO: rep invariant
-    //  author is a  case-sensitve, nonempty string of letters, digits, underscores
-    //  1<= title.length <= 140
+    //  authors: Alphabetic case and author order are significant, 
+    //  authors must have at least one name, and each name must contain 
+    //  at least one non-space character.
+    //  title must contain at least one non-space character.
+    //  year >= 0
     // TODO: abstraction function
     //  Each book is uniquely identified by its title, author list, and publication year.  
     //  Alphabetic case and author order are significant, so a book written by "Fred" is different than a book written by "FRED".
@@ -37,8 +40,8 @@ public class Book {
     public Book(String title, List<String> authors, int year) {
 //        throw new RuntimeException("not implemented yet");
         this.title = title;
-        this authors = authors;
-        this year = year;
+        this.authors = authors;
+        this.year = year;
     }
     
     // assert the rep invariant
@@ -54,8 +57,10 @@ public class Book {
         Book BookOne = new Book("abc", authorsOne, 2000);
         Book BookTwo = new Book("abc", authorsTwo, 2000);
 
-        assert title.length() <= 140 && 1 <= title.length();
+        assert 1 <= title.length() && authors.size() >= 1;
         assert authorsOne.get(0).equals(authorsOne.get(1)) == false;
+        // check >=1  non-space character of each title, author
+        // year >= 0
         
     }
     
@@ -73,9 +78,12 @@ public class Book {
     public List<String> getAuthors() {
 //        throw new RuntimeException("not implemented yet");
         List<String> getCopyOfAuthors = new ArrayList<String>();
-        for (String author : authors) {
+        for (String author : authors ) {
             getCopyOfAuthors.add(author);
         }
+//        for (int i = 0; i < authors.size(); i++) {
+//            getCopyOfAuthors.add(authors.get(i));
+//        }
         return getCopyOfAuthors;
     }
 
@@ -98,15 +106,30 @@ public class Book {
 
     // uncomment the following methods if you need to implement equals and hashCode,
     // or delete them if you don't
-    // @Override
-    // public boolean equals(Object that) {
-    //     throw new RuntimeException("not implemented yet");
-    // }
-    // 
-    // @Override
-    // public int hashCode() {
-    //     throw new RuntimeException("not implemented yet");
-    // }
+     @Override
+     public boolean equals(Object that) {
+//         throw new RuntimeException("not implemented yet");
+         if (this == that) {
+             return true;
+         }
+         if (that == null || that.getClass() != Book.class) {
+             return false;
+         } 
+         
+         Book obj = (Book) that;
+         return obj.title.equals(title) && obj.authors.equals(authors)
+                 && obj.year == year;
+         
+     }
+     
+     @Override
+     public int hashCode() {
+//         throw new RuntimeException("not implemented yet");
+         int titleHC = title.hashCode();
+         int authorsHC = titleHC * 31 + authors.hashCode();
+         int yearHC = authorsHC * 31 + Integer.hashCode(year);
+         return yearHC;
+     }
 
 
 

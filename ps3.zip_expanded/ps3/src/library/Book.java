@@ -26,8 +26,8 @@ public class Book {
     //  Alphabetic case and author order are significant, so a book written by "Fred" is different than a book written by "FRED".
     // TODO: safety from rep exposure argument
     //  All fields are private;
-    //  author and text are Strings, authors is a mutable List containing mutable List objects, 
-    //  but getAuthors() makes a defensive copy of the List it returns, and all other parameters 
+    //  author and text are Strings, authors is a mutable List containing immutable string, 
+    //  but constructor authors & getAuthors() makes a defensive copy of the List it returns, and all other parameters 
     //  and return values are immutable String or void, so are guaranteed immutable;
     
     /**
@@ -40,7 +40,7 @@ public class Book {
     public Book(String title, List<String> authors, int year) {
 //        throw new RuntimeException("not implemented yet");
         this.title = title;
-        this.authors = authors;
+        this.authors = new ArrayList<String>(authors);
         this.year = year;
     }
     

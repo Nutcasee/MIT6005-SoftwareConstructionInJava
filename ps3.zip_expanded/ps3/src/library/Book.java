@@ -112,7 +112,7 @@ public class Book {
          if (this == that) {
              return true;
          }
-         if (that == null || !that.getClass().isInstance(Book)) {
+         if (that == null || !(that instanceof Book)) {
              return false;
          } 
          

@@ -11,11 +11,14 @@
  *
  * For more information, see the parsers reading.
  */
-root ::= sum;
+root ::= expr;
 @skip whitespace{
-	sum ::= primitive ('+' primitive)*;
-	primitive ::= number | '(' sum ')';
+	expr ::= sum | mul;
+	sum ::= factor ('+' factor)*;
+	mul ::= factor ('*' factor)+;
+	factor ::= number | var | '(' expr ')';
 }
-number ::= [0-9]+;
+number ::= [0-9]+(\.[0-9]*)?;
+var ::= [a-zA-Z][\w]*;
 
 whitespace ::= [ ]+;

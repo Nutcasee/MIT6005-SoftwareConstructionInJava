@@ -16,7 +16,7 @@ root ::= expr;
 	expr ::= sum | mul;
 	sum ::= factor ('+' factor)*;
 	mul ::= factor ('*' factor)+;
-	factor ::= number | var | '(' expr ')';
+	factor ::= number | var | '(' sum ')' | (' mul ')';
 }
 number ::= [0-9]+(\.[0-9]*)?;
 var ::= [a-zA-Z][\w]*;

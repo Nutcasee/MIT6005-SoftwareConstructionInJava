@@ -34,11 +34,11 @@ public interface Expression {
 //        throw new RuntimeException("unimplemented");
         try {
             Parser<ExpressionGrammar> parser =
-                    GrammarCompiler.compile(new File("Expression.g"), ExpressionGrammar.ROOT);
+                    GrammarCompiler.compile(new File("src/expressivo/Expression.g"), ExpressionGrammar.ROOT);
             
             ParseTree<ExpressionGrammar> tree = parser.parse(input);
-//            System.out.println("tree.toString() in parse interface: ", tree.toString());
-            tree.display();
+            System.out.println("tree.toString() in parse interface: " + tree.toString());
+//            tree.display();
             return Expression.buildAST(tree);
         } catch (Exception e) {
 //            throw new IllegalArgumentException(e.getMessage(), e);
@@ -53,7 +53,7 @@ public interface Expression {
      * @return
      */
     public static Expression buildAST(ParseTree<ExpressionGrammar> tree){
-        System.out.println("tree.getName() in parse interface: ", tree.getName());
+//        System.out.println("tree.getName() in parse interface: ", tree.getName());
         switch(tree.getName()){
         /*
          * Since tree is a ParseTree parameterized by the type ExpressionGrammar, tree.getName() 

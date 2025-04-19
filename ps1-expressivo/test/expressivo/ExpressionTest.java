@@ -126,7 +126,14 @@ public class ExpressionTest {
        assertTrue(new Plus(new Multiply(Xyz, n), Xyz).hashCode() == new Plus(new Multiply(Xyz, n), Xyz).hashCode());
     }
     
-    
+    @Test
+    public void testParseNumber() throws Exception{
+        Expression ex1 = Expression.parse("1");
+        assertEquals(new Number("1"), ex1);
+        assertEquals(new Number("1.0"), Expression.parse("1.0"));
+        assertEquals(new Number("1"), Expression.parse("1.0"));
+        assertEquals(new Number("1.0"), Expression.parse("1"));
+    }
     
     // Test Expression.parse() "3+3"
 //    @Test

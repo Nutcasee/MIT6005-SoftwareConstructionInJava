@@ -35,7 +35,7 @@ public interface Expression {
         try {
             Parser<ExpressionGrammar> parser =
                     GrammarCompiler.compile(new File("src/expressivo/Expression.g"), ExpressionGrammar.ROOT);
-            System.out.println("parser " + parser);
+//            System.out.println("parser " + parser);
 
             ParseTree<ExpressionGrammar> tree = parser.parse(input);
             System.out.println("tree.toString() in parse interface: " + tree.toString());

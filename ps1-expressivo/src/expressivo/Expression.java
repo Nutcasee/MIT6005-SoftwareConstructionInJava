@@ -22,7 +22,7 @@ public interface Expression {
     // IntegerExpression = Number(n:int) + Plus(left:IntegerExpression, right:IntegerExpression)
     // ImList<E> = Empty + Cons(first:E, rest:ImList)
     
-    enum ExpressionGrammar {ROOT, EXPR, SUM, MUL, FACTOR, NUMBER, VAR, WHITESPACE};
+    enum ExpressionGrammar {ROOT, EXPR, SUM, MUL, FACTOR, NUMBER, VAR, WHITESPACE, PRIMITIVE};
     
     /**
      * Parse an expression.
@@ -35,14 +35,15 @@ public interface Expression {
         try {
             Parser<ExpressionGrammar> parser =
                     GrammarCompiler.compile(new File("src/expressivo/Expression.g"), ExpressionGrammar.ROOT);
-            
+            System.out.println("parser " + parser);
+
             ParseTree<ExpressionGrammar> tree = parser.parse(input);
             System.out.println("tree.toString() in parse interface: " + tree.toString());
 //            tree.display();
             return Expression.buildAST(tree);
         } catch (Exception e) {
 //            throw new IllegalArgumentException(e.getMessage(), e);
-            throw new IllegalArgumentException("error during parsing:" + input);            
+            throw new IllegalArgumentException("error during parsing:" + e);            
         }
     }
     
@@ -104,20 +105,20 @@ public interface Expression {
              * Note that we only care about the children that are factors. There may also be 
              * some whitespace children which we want to ignore.
              */
-            boolean first = true;
-            Expression result = null;
+            boolean first1 = true;
+            Expression result1 = null;
             for(ParseTree<ExpressionGrammar> child : tree.childrenByName(ExpressionGrammar.FACTOR)){                
-                if(first){
-                    result = buildAST(child);
-                    first = false;
+                if(first1){
+                    result1 = buildAST(child);
+                    first1 = false;
                 }else{
-                    result = new Multiply(result, buildAST(child));
+                    result1 = new Multiply(result1, buildAST(child));
                 }
             }
-            if (first) {
+            if (first1) {
                 throw new RuntimeException("sum must have a non whitespace child:" + tree.toString());
             }
-            return result;
+            return result1;
         case FACTOR:
             if(!tree.childrenByName(ExpressionGrammar.NUMBER).isEmpty()){
                 return buildAST(tree.childrenByName(ExpressionGrammar.NUMBER).get(0));
@@ -128,6 +129,7 @@ public interface Expression {
             } else {
                 throw new RuntimeException("You should never reach here:" + tree.toString());
             }
+        case PRIMITIVE: 
         case VAR:
             return new Variable(tree.getContents());
         case NUMBER:

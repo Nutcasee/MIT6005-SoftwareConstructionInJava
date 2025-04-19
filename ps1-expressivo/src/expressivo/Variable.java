@@ -5,11 +5,16 @@ public class Variable implements Expression {
     
     public Variable(String variable) {
         this.variable = variable;
+        checkRep();
+    }
+    
+    private void checkRep() {
+        assert variable.matches("[a-zA-Z][\\w]*");
     }
     
     @Override
     public String toString() {
-        return variable.toString();
+        return variable;
     }
     
     @Override
@@ -24,14 +29,14 @@ public class Variable implements Expression {
       
       Variable obj = (Variable) that;
 //      return Math.abs(obj.number - number) < 0.00001;
-      return obj.variable.equals(variable));
+      return obj.variable.equals(variable);
     }
     
     @Override
     public int hashCode() {
 //        throw new RuntimeException("not implemented yet");
         int result = 31;
-        int result = result + variable.hashCode();
+        result = result + variable.hashCode();
         return result;
     }    
 }

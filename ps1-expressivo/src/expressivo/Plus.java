@@ -32,9 +32,9 @@ public class Plus implements Expression {
       public int hashCode() {
     //      throw new RuntimeException("not implemented yet");
           int result = 31;
-          int result = result + left.hashCode();
-          int result = result + "+".hashCode();
-          int result = result * 31 + right.hashCode();
+          result = result + left.hashCode();
+          result = result + "+".hashCode();
+          result = result * 31 + right.hashCode();
           return result;
       }    
 }

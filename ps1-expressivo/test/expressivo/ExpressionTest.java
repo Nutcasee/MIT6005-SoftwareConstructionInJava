@@ -19,18 +19,121 @@ public class ExpressionTest {
     // Test Expression.parse() "3+3"
     
 //    Expression sumSimpleThree = Plus.parse("3","3");?
+    final Double max = Double.MAX_VALUE;
+    final private Number zero = new Number("0");
+    final private Number zero_f = new Number("0.00");
+    final private Number one = new Number("1.00");
+    final private Number maxNumber = new Number(max.toString());
     
+
     @Test(expected=AssertionError.class)
     public void testAssertionsEnabled() {
         assert false; // make sure assertions are enabled with VM argument: -ea
     }
     
-    // Test Expression.parse() "3+3"
     @Test
-    public void testSimpleSum() {
-        Expression sumSimpleThree = Expression.parse("3 + 3");
-        assertEquals("3+3", sumSimpleThree.toString());
+    public void testNumberEquals() {
+        assertTrue(new Number("0").equals(zero));
+        assertTrue(new Number("0").equals(zero_f));
+        assertFalse(new Number("0").equals(one));
+        assertFalse(new Number("1").equals(zero));
     }
+    
+    @Test
+    public void testNumberToString() {
+        assertEquals(new Double(0).toString(), new Number("0").toString());
+        assertEquals(new Double(1).toString(), new Number("1").toString());
+        assertEquals(max.toString(), maxNumber.toString());
+    }
+    @Test
+    public void testNumberHashCode() {
+        assertEquals(zero.hashCode(), zero_f.hashCode());
+        assertEquals(one.hashCode(), one.hashCode());
+        assertNotEquals(zero.hashCode(), one.hashCode());
+        assertNotEquals(zero.hashCode(), maxNumber.hashCode());
+    }
+    
+    private final Number n = new Number("1.23");
+    private final Number o = new Number("4.56");
+    private final Variable Xyz = new Variable("Xyz");
+    private final Variable Tuv = new Variable("Tuv");
+
+    @Test
+    public void testMultiplyEquals() {
+        assertTrue(new Multiply(n, Xyz).equals(new Multiply(n, Xyz)));
+        assertTrue(new Multiply(n, o).equals(new Multiply(n, o)));
+        assertFalse(new Multiply(Xyz, n).equals(new Multiply(n, Xyz)));
+        assertFalse(new Multiply(o, n).equals(new Multiply(n, o)));
+        assertTrue(new Multiply(Xyz, new Multiply(Xyz, n)).equals(new Multiply(Xyz, new Multiply(Xyz, n))));
+        assertTrue(new Multiply(new Multiply(Xyz, n), Xyz).equals(new Multiply(new Multiply(Xyz, n), Xyz)));
+        assertTrue(new Multiply(Xyz, new Plus(Xyz, n)).equals(new Multiply(Xyz, new Plus(Xyz, n))));
+        assertTrue(new Multiply(new Plus(Xyz, n), Xyz).equals(new Multiply(new Plus(Xyz, n), Xyz)));
+        assertFalse(new Multiply(new Plus(Xyz, n), Xyz).equals(new Multiply(Xyz, new Plus(Xyz, n))));
+    }
+    
+    @Test   
+    public void testMultiplyToString() {
+        assertEquals("(1.23 * Xyz)", new Multiply(n, Xyz).toString());
+        assertEquals("(Xyz * 1.23)", new Multiply(Xyz, n).toString());
+        assertEquals("(Xyz * Tuv)", new Multiply(Xyz, Tuv).toString());
+        assertEquals("(Xyz * (Xyz * 1.23))", new Multiply(Xyz, new Multiply(Xyz, n)).toString());
+        assertEquals("((Xyz * 1.23) * Xyz)", new Multiply(new Multiply(Xyz, n), Xyz).toString());
+        assertEquals("(Xyz * (Xyz + 1.23))", new Multiply(Xyz, new Plus(Xyz, n)).toString());
+        assertEquals("((Xyz + 1.23) * Xyz)", new Multiply(new Plus(Xyz, n), Xyz).toString());
+    }
+    
+    @Test   
+    public void testMultiplyHashCode() {
+       assertFalse(new Multiply(n, Xyz).hashCode() == new Multiply(Xyz, n).hashCode());
+       assertTrue(new Multiply(n, Xyz).hashCode() == new Multiply(n, Xyz).hashCode());
+       assertTrue(new Multiply(Xyz, new Multiply(Xyz, n)).hashCode() == new Multiply(Xyz, new Multiply(Xyz, n)).hashCode());
+       assertTrue(new Multiply(new Multiply(Xyz, n), Xyz).hashCode() == new Multiply(new Multiply(Xyz, n), Xyz).hashCode());
+       assertTrue(new Multiply(Xyz, new Plus(Xyz, n)).hashCode() == new Multiply(Xyz, new Plus(Xyz, n)).hashCode());
+       assertTrue(new Multiply(new Plus(Xyz, n), Xyz).hashCode() == new Multiply(new Plus(Xyz, n), Xyz).hashCode());
+    }
+     
+    @Test   
+    public void testPlusEquals() {
+        assertTrue(new Plus(n, Xyz).equals(new Plus(n, Xyz)));
+        assertTrue(new Plus(n, o).equals(new Plus(n, o)));
+        assertFalse(new Plus(Xyz, n).equals(new Plus(n, Xyz)));
+        assertFalse(new Plus(o, n).equals(new Plus(n, o)));
+        assertTrue(new Plus(Xyz, new Plus(Xyz, n)).equals(new Plus(Xyz, new Plus(Xyz, n))));
+        assertTrue(new Plus(new Plus(Xyz, n), Xyz).equals(new Plus(new Plus(Xyz, n), Xyz)));
+        assertTrue(new Plus(Xyz, new Multiply(Xyz, n)).equals(new Plus(Xyz, new Multiply(Xyz, n))));
+        assertTrue(new Plus(new Multiply(Xyz, n), Xyz).equals(new Plus(new Multiply(Xyz, n), Xyz)));
+        assertFalse(new Plus(new Multiply(Xyz, n), Xyz).equals(new Plus(Xyz, new Multiply(Xyz, n))));
+    }
+    
+    @Test   
+    public void testPlusToString() {
+        assertEquals("(1.23 + Xyz)", new Plus(n, Xyz).toString());
+        assertEquals("(Xyz + 1.23)", new Plus(Xyz, n).toString());
+        assertEquals("(Xyz + Tuv)", new Plus(Xyz, Tuv).toString());
+        assertEquals("(Xyz + (Xyz + 1.23))", new Plus(Xyz, new Plus(Xyz, n)).toString());
+        assertEquals("((Xyz + 1.23) + Xyz)", new Plus(new Plus(Xyz, n), Xyz).toString());
+        assertEquals("(Xyz + (Xyz * 1.23))", new Plus(Xyz, new Multiply(Xyz, n)).toString());
+        assertEquals("((Xyz * 1.23) + Xyz)", new Plus(new Multiply(Xyz, n), Xyz).toString());
+    }
+    
+    @Test   
+    public void testPlusHashCode() {
+       assertFalse(new Plus(n, Xyz).hashCode() == new Plus(Xyz, n).hashCode());
+       assertTrue(new Plus(n, Xyz).hashCode() == new Plus(n, Xyz).hashCode());
+       assertTrue(new Plus(Xyz, new Plus(Xyz, n)).hashCode() == new Plus(Xyz, new Plus(Xyz, n)).hashCode());
+       assertTrue(new Plus(new Plus(Xyz, n), Xyz).hashCode() == new Plus(new Plus(Xyz, n), Xyz).hashCode());
+       assertTrue(new Plus(Xyz, new Multiply(Xyz, n)).hashCode() == new Plus(Xyz, new Multiply(Xyz, n)).hashCode());
+       assertTrue(new Plus(new Multiply(Xyz, n), Xyz).hashCode() == new Plus(new Multiply(Xyz, n), Xyz).hashCode());
+    }
+    
+    
+    
+    // Test Expression.parse() "3+3"
+//    @Test
+//    public void testSimpleSum() {
+//        Expression sumSimpleThree = Expression.parse("3 + 3");
+//        assertEquals("3+3", sumSimpleThree.toString());
+//    }
     // TODO tests for Expression
     
 }

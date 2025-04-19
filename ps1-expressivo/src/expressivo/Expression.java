@@ -37,12 +37,12 @@ public interface Expression {
                     GrammarCompiler.compile(new File("Expression.g"), ExpressionGrammar.ROOT);
             
             ParseTree<ExpressionGrammar> tree = parser.parse(input);
-            System.out.println(tree.toString());
+//            System.out.println("tree.toString() in parse interface: ", tree.toString());
             tree.display();
-            return buildAST(tree);
+            return Expression.buildAST(tree);
         } catch (Exception e) {
-            throw new IllegalArgumentException(e.getMessage(), e);
-//            throw new IllegalArgumentException("input is invalid:" + input);            
+//            throw new IllegalArgumentException(e.getMessage(), e);
+            throw new IllegalArgumentException("error during parsing:" + input);            
         }
     }
     
@@ -53,7 +53,7 @@ public interface Expression {
      * @return
      */
     public static Expression buildAST(ParseTree<ExpressionGrammar> tree){
-
+        System.out.println("tree.getName() in parse interface: ", tree.getName());
         switch(tree.getName()){
         /*
          * Since tree is a ParseTree parameterized by the type ExpressionGrammar, tree.getName() 
@@ -111,7 +111,7 @@ public interface Expression {
                     result = buildAST(child);
                     first = false;
                 }else{
-                    result = new Mul(result, buildAST(child));
+                    result = new Multiply(result, buildAST(child));
                 }
             }
             if (first) {
@@ -128,6 +128,10 @@ public interface Expression {
             } else {
                 throw new RuntimeException("You should never reach here:" + tree.toString());
             }
+        case VAR:
+            return new Variable(tree.getContents());
+        case NUMBER:
+            return new Number(tree.getContents());
         case WHITESPACE:
             /*
              * Since we are always avoiding calling buildAST with whitespace, 

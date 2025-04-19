@@ -36,5 +36,12 @@ public class Plus implements Expression {
           result = result + "+".hashCode();
           result = result * 31 + right.hashCode();
           return result;
-      }    
+      }
+      
+      @Override
+      public Expression differentiation(String var) {
+          return new Plus(left.differentiation(var), 
+                  right.differentiation(var)); 
+          
+      }
 }

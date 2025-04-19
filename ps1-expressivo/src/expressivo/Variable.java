@@ -39,4 +39,12 @@ public class Variable implements Expression {
         result = result + variable.hashCode();
         return result;
     }    
+    
+    @Override
+    public Expression differentiation(String var) {
+        if (variable.equals(var)) {
+            return new Number("1");
+        }
+        return new Variable("variable");
+    }
 }

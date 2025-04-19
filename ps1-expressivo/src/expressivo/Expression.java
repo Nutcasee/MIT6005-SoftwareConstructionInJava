@@ -169,6 +169,9 @@ public interface Expression {
      */
     @Override
     public int hashCode();
+
+    
+    public Expression differentiation(String var);
     
     // TODO more instance methods
     

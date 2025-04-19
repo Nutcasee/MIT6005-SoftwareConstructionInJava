@@ -46,5 +46,10 @@ public class Number implements Expression {
         int result = 31 + Double.hashCode(number);;
 //        int result = result + Double.hashCode(number);
         return result;
-    }    
+    }
+    
+    @Override
+    public Expression differentiation(String var) {
+        return new Number("0");
+    }
 }

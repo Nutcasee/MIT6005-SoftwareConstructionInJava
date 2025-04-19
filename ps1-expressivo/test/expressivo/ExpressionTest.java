@@ -195,6 +195,7 @@ public class ExpressionTest {
          assertEquals(new Multiply(new Plus(new Number("1"), new Number("2")), new Number("3")), exp5);
     }
 
+    
     // Test Expression.parse() "3+3"
 //    @Test
 //    public void testSimpleSum() {

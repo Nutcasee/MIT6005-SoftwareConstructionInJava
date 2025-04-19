@@ -22,7 +22,7 @@ public interface Expression {
     // IntegerExpression = Number(n:int) + Plus(left:IntegerExpression, right:IntegerExpression)
     // ImList<E> = Empty + Cons(first:E, rest:ImList)
     
-    enum ExpressionGrammar {ROOT, EXPR, SUM, MUL, FACTOR, NUMBER, VAR, WHITESPACE, PRIMITIVE};
+    enum ExpressionGrammar {ROOT, EXPR, SUM, MUL, FACTOR, NUMBER, VAR, WHITESPACE};
     
     /**
      * Parse an expression.
@@ -129,7 +129,6 @@ public interface Expression {
             } else {
                 throw new RuntimeException("You should never reach here:" + tree.toString());
             }
-        case PRIMITIVE: 
         case VAR:
             return new Variable(tree.getContents());
         case NUMBER:

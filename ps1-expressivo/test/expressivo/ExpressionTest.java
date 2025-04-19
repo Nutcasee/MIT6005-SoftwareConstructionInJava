@@ -135,6 +135,66 @@ public class ExpressionTest {
         assertEquals(new Number("1.0"), Expression.parse("1"));
     }
     
+    @Test
+    public void testParseVar() throws Exception {
+        assertEquals(new Variable("x"), Expression.parse("x"));
+        assertNotEquals(new Variable("X"), Expression.parse("x"));
+    }
+    
+    @Test
+    public void testParseSum() throws Exception {
+        Expression exp1 = Expression.parse("1");
+        Expression exp2 = Expression.parse("5");
+        Expression exp3 = Expression.parse("x");
+        Expression exp4 = Expression.parse("y");
+        assertEquals(new Plus(exp1, exp2), Expression.parse("1 + 5"));
+        assertEquals(new Plus(exp1, exp2), Expression.parse("1+5"));
+        assertEquals(new Plus(exp1, exp2), Expression.parse("1      + 5"));
+        assertEquals(new Plus(exp1, exp2), Expression.parse("(1) + 5"));
+        assertEquals(new Plus(exp1, exp2), Expression.parse("1 + (5)"));
+        assertEquals(new Plus(exp1, exp2), Expression.parse("(1 + 5)"));
+        assertEquals(new Plus(exp1, exp2), Expression.parse("1.0 + 5"));
+        assertEquals(new Plus(exp1, exp2), Expression.parse("((1) + 5)"));
+        assertNotEquals(new Plus(exp1, exp2), Expression.parse("5 + 1"));
+        assertEquals(new Plus(exp3, exp4), Expression.parse("x + y"));
+        assertNotEquals(new Plus(exp3, exp4), Expression.parse("y + x"));
+        assertEquals(new Plus(exp1, exp3), Expression.parse("(1) + x"));
+        
+    }
+    @Test
+    public void testParseMultiply() throws Exception {
+        Expression exp1 = Expression.parse("1");
+        Expression exp2 = Expression.parse("5");
+        Expression exp3 = Expression.parse("x");
+        Expression exp4 = Expression.parse("y");
+        assertEquals(new Multiply(exp1, exp2), Expression.parse("1 * 5"));
+        assertEquals(new Multiply(exp1, exp2), Expression.parse("1*5"));
+        assertEquals(new Multiply(exp1, exp2), Expression.parse("1 *      5"));
+        assertEquals(new Multiply(exp1, exp2), Expression.parse("(1) * 5"));
+        assertEquals(new Multiply(exp1, exp2), Expression.parse("1 * (5)"));
+        assertEquals(new Multiply(exp1, exp2), Expression.parse("(1 * 5)"));
+        assertEquals(new Multiply(exp1, exp2), Expression.parse("1.0 * 5"));
+        assertEquals(new Multiply(exp1, exp2), Expression.parse("((1) * 5)"));
+        assertNotEquals(new Multiply(exp1, exp2), Expression.parse("5 * 1"));
+        assertEquals(new Multiply(exp3, exp4), Expression.parse("x * y"));
+        assertNotEquals(new Multiply(exp3, exp4), Expression.parse("y * x"));
+        assertEquals(new Multiply(exp1, exp3), Expression.parse("(1) * x"));
+    }
+    
+    @Test
+    public void testParseMutlipleOperands() throws Exception {
+         Expression exp = Expression.parse("1 + 2 + 3");
+         Expression exp2 = Expression.parse("1 * 2 + 3");
+         Expression exp3 = Expression.parse("1 + 2 * 3");
+         Expression exp4 = Expression.parse("1 + (2 * 3)");
+         Expression exp5 = Expression.parse("(1 + 2) * 3");
+         assertEquals(new Plus(new Plus(new Number("1"), new Number("2")), new Number("3")), exp);
+         assertEquals(new Plus(new Multiply(new Number("1"), new Number("2")), new Number("3")), exp2);
+         assertEquals(new Plus(new Number("1"), new Multiply(new Number("2"), new Number("3"))), exp3);
+         assertEquals(new Plus(new Number("1"), new Multiply(new Number("2"), new Number("3"))), exp4);
+         assertEquals(new Multiply(new Plus(new Number("1"), new Number("2")), new Number("3")), exp5);
+    }
+
     // Test Expression.parse() "3+3"
 //    @Test
 //    public void testSimpleSum() {

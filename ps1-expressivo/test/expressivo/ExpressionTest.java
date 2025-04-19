@@ -184,13 +184,13 @@ public class ExpressionTest {
     @Test
     public void testParseMutlipleOperands() throws Exception {
          Expression exp = Expression.parse("1 + 2 + 3");
-//         Expression exp2 = Expression.parse("1 * 2 + 3");
-//         Expression exp3 = Expression.parse("1 + 2 * 3");
+         Expression exp2 = Expression.parse("1 * 2 + 3");
+         Expression exp3 = Expression.parse("1 + 2 * 3");
          Expression exp4 = Expression.parse("1 + (2 * 3)");
          Expression exp5 = Expression.parse("(1 + 2) * 3");
          assertEquals(new Plus(new Plus(new Number("1"), new Number("2")), new Number("3")), exp);
-//         assertEquals(new Plus(new Multiply(new Number("1"), new Number("2")), new Number("3")), exp2);
-//         assertEquals(new Plus(new Number("1"), new Multiply(new Number("2"), new Number("3"))), exp3);
+         assertEquals(new Plus(new Multiply(new Number("1"), new Number("2")), new Number("3")), exp2);
+         assertEquals(new Plus(new Number("1"), new Multiply(new Number("2"), new Number("3"))), exp3);
          assertEquals(new Plus(new Number("1"), new Multiply(new Number("2"), new Number("3"))), exp4);
          assertEquals(new Multiply(new Plus(new Number("1"), new Number("2")), new Number("3")), exp5);
     }

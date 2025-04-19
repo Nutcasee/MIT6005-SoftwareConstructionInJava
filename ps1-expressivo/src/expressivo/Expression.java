@@ -72,12 +72,12 @@ public interface Expression {
              * A EXPR will have either a SUM or a MUL as child (in addition to some whitespace)
              * By checking which one, we can determine which case we are in.
              */             
-
-            if(tree.childrenByName(ExpressionGrammar.SUM).isEmpty()){
-                return buildAST(tree.childrenByName(ExpressionGrammar.MUL).get(0));
-            }else{
-                return buildAST(tree.childrenByName(ExpressionGrammar.SUM).get(0));
-            }
+            return buildAST(tree.childrenByName(ExpressionGrammar.SUM).get(0));
+//            if(tree.childrenByName(ExpressionGrammar.SUM).isEmpty()){
+//                return buildAST(tree.childrenByName(ExpressionGrammar.MUL).get(0));
+//            }else{
+//                return buildAST(tree.childrenByName(ExpressionGrammar.SUM).get(0));
+//            }
 
         case SUM:
             /*
@@ -87,7 +87,7 @@ public interface Expression {
              */
             boolean first = true;
             Expression result = null;
-            for(ParseTree<ExpressionGrammar> child : tree.childrenByName(ExpressionGrammar.FACTOR)){                
+            for(ParseTree<ExpressionGrammar> child : tree.childrenByName(ExpressionGrammar.MUL)){                
                 if(first){
                     result = buildAST(child);
                     first = false;

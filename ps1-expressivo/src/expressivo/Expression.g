@@ -13,9 +13,9 @@
  */
 root ::= expr;
 @skip whitespace{
-	expr ::= sum | mul;
-	sum ::= factor ('+' factor)*;
-	mul ::= factor ('*' factor)+;
+	expr ::= sum;
+	sum ::= mul ('+' mul)*;
+	mul ::= factor ('*' factor)*;
 	factor ::= number | var | '(' expr ')';
 }
 number ::= [0-9]+ '.'? [0-9]*;

@@ -17,14 +17,11 @@ public class SUM {
             Map<String, Double> simMap = new HashMap<>();
             simMap.put("x", 2.0);
             simMap.put("y", 1.0);
+                    
+            String afterSimplify = Commands.simplify("x + 2", simMap);       
+            System.out.println("afterSimplify " + afterSimplify);
             
-            Expression exp = Expression.parse("3");
-            Expression exp2 = Expression.parse("3 + x");
-
-            Expression expSim = exp.simplification(simMap);
-            Expression expSim2 = exp2.simplification(simMap);
-
-            System.out.println("expSim2 " + expSim2);
+            assertEquals("4.0", afterSimplify);
 //            assertEquals(new V("(3.0 + 2.0)"), expSim2); 
         
 //            assertEquals(new Number("3"), expSim);

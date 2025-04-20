@@ -39,10 +39,14 @@ public class CommandsTest {
         simMap.put("x", 2.0);
         simMap.put("y", 1.0);
                 
-        String afterSimplify = Commands.simplify("x", simMap);       
+        String afterSimplify = Commands.simplify("x", simMap);     
+        String afterSimplify2 = Commands.simplify("x + 2", simMap);       
         System.out.println("afterSimplify " + afterSimplify);
-        
+        System.out.println("afterSimplify2 " + afterSimplify2);
+
         assertEquals("2.0", afterSimplify);
+        assertEquals("4.0", afterSimplify2);
+        
          
     }
     

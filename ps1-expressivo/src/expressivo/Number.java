@@ -59,8 +59,7 @@ public class Number implements Expression {
         return this;
     }
     
-    @Override
-    public double get() {
-        return this.number;
+    public boolean isNumber() {
+        return true;
     }
 }

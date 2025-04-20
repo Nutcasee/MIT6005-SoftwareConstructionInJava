@@ -48,10 +48,10 @@ public class Multiply implements Expression {
       
       
       public Expression simplification(Map<String,Double> environment) {
-          if (left.simplification(environment) instanceof Number &&
-                  right.simplification(environment) instanceof Number) {
-              double l = left.simplification(environment).get();
-              double r = right.simplification(environment).get();
+          if (left.simplification(environment).isNumber() &&
+                  right.simplification(environment).isNumber()) {
+              double l = Double.parseDouble(left.simplification(environment).toString());
+              double r = Double.parseDouble(right.simplification(environment).toString());
               double mul = l * r;
               
               return new Number(String.valueOf(mul));
@@ -59,5 +59,9 @@ public class Multiply implements Expression {
           
           return new Multiply(left.simplification(environment),
                   right.simplification(environment));
+      }
+      
+      public boolean isNumber() {
+          return false;
       }
 }

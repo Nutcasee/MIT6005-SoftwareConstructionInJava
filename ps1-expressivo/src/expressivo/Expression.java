@@ -176,7 +176,7 @@ public interface Expression {
 
     public Expression simplification(Map<String, Double> environment);
 
-    public double get();
+    public boolean isNumber();
 
     
     // TODO more instance methods

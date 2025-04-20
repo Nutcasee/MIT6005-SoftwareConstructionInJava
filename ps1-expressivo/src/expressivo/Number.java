@@ -55,8 +55,11 @@ public class Number implements Expression {
         return new Number("0");
     }
     
-    @Override
     public Expression simplification(Map<String,Double> environment) {
         return this;
+    }
+    
+    public double get() {
+        return this.number;
     }
 }

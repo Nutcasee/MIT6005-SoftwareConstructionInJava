@@ -50,9 +50,9 @@ public class Variable implements Expression {
         return new Variable(variable);
     }
     
-    @Override
+    
     public Expression simplification(Map<String,Double> environment) {
-        if (environment.keySet().contains(variable)) {
+        if (environment.containsKey(variable)) {
             return new Number(environment.get(variable).toString());
         }
         return this;

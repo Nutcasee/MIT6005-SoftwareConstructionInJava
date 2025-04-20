@@ -174,7 +174,10 @@ public interface Expression {
     
     public Expression differentiation(String var);
 
-    Expression simplification(Map<String, Double> environment);
+    public Expression simplification(Map<String, Double> environment);
+
+    public double get();
+
     
     // TODO more instance methods
     

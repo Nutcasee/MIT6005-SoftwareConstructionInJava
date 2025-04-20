@@ -214,11 +214,14 @@ public class ExpressionTest {
         simMap.put("y", 1.0);
         
         Expression exp = Expression.parse("3");
-       
+        Expression exp2 = Expression.parse("3 + x");
+
         Expression expSim = exp.simplification(simMap);
-        
-         assertEquals(new Number("3"), expSim);
-         
+        Expression expSim2 = exp2.simplification(simMap);
+
+        System.out.println("expSim2 " + expSim2.toString());
+        assertEquals(new Number("3"), expSim);
+        assertEquals(new Number("(3.0 + 2.0)"), expSim2); 
     }
     
     // Test Expression.parse() "3+3"

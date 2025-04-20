@@ -41,13 +41,22 @@ public class Plus implements Expression {
       }
       
       @Override
-      public Expression differentiation(String var) {
+      public Expression differentiation(String var) {          
           return new Plus(left.differentiation(var),
                   right.differentiation(var));
       }
       
-      @Override
+      
       public Expression simplification(Map<String,Double> environment) {
+          if (left.simplification(environment) instanceof Number &&
+                  right.simplification(environment) instanceof Number) {
+              double l = left.simplification(environment).get();
+              double r = right.simplification(environment).get();
+              double sum = l + r;
+              
+              return new Number(String.valueOf(sum));
+          }
+          
           return new Plus(left.simplification(environment),
                   right.simplification(environment));
       }

@@ -42,11 +42,21 @@ public class Commands {
 //        throw new RuntimeException("unimplemented");
         Expression expr = Expression.parse(expression);
         Expression exprAfterSim = expr.simplification(environment);
-        if (exprAfterSim instanceof Number ) {
-            Double valueOfExpr = Double.parseDouble(exprAfterSim.toString());
-            return valueOfExpr.toString();
-        }
+        System.out.println("exprAfterSim class" + exprAfterSim.getClass());
+        System.out.println("exprAfterSim is: " + exprAfterSim);
         
+        Expression exprAfterSim2 = Expression.parse(exprAfterSim.toString());
+        System.out.println("exprAfterSim2 class" + exprAfterSim2.getClass());
+        System.out.println("exprAfterSim2 is: " + exprAfterSim2);
+
+//        System.out.println("Double.parseDouble(exprAfterSim.toString()) is: " + Double.parseDouble(exprAfterSim.toString()));
+//        Double valueOfExprInDouble = Double.parseDouble(exprAfterSim.toString());
+//        if (exprAfterSim instanceof Number ) {
+//            Double valueOfExprInDouble = Double.parseDouble(exprAfterSim.toString());
+//            System.out.println("valueOfExprInDouble " + valueOfExprInDouble);
+//            return valueOfExprInDouble.toString();
+//        }
+//        
         return "";
     }
     

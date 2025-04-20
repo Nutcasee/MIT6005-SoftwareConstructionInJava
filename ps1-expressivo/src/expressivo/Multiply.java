@@ -46,8 +46,17 @@ public class Multiply implements Expression {
                   new Multiply(left.differentiation(var), right));
       }
       
-      @Override
+      
       public Expression simplification(Map<String,Double> environment) {
+          if (left.simplification(environment) instanceof Number &&
+                  right.simplification(environment) instanceof Number) {
+              double l = left.simplification(environment).get();
+              double r = right.simplification(environment).get();
+              double mul = l * r;
+              
+              return new Number(String.valueOf(mul));
+          }
+          
           return new Multiply(left.simplification(environment),
                   right.simplification(environment));
       }

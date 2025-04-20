@@ -41,6 +41,12 @@ public class Plus implements Expression {
       }
       
       @Override
+      public Expression differentiation(String var) {
+          return new Plus(left.differentiation(var),
+                  right.differentiation(var));
+      }
+      
+      @Override
       public Expression simplification(Map<String,Double> environment) {
           return new Plus(left.simplification(environment),
                   right.simplification(environment));

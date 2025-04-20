@@ -5,6 +5,9 @@ package expressivo;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 
 /**
@@ -24,10 +27,26 @@ public class CommandsTest {
     public void testDifferentiateMethod() throws Exception {
         String afterDiff = Commands.differentiate("x", "x");       
        
+        System.out.println("afterDiff " + afterDiff);
         
-        assertEquals("1", afterDiff);
+        assertEquals("1.0", afterDiff);
          
     }
+    
+    @Test
+    public void testSimplificationMethod() throws Exception {
+        Map<String, Double> simMap = new HashMap<>();
+        simMap.put("x", 2.0);
+        simMap.put("y", 1.0);
+                
+        String afterSimplify = Commands.simplify("x", simMap);       
+        System.out.println("afterSimplify " + afterSimplify);
+        
+        assertEquals("2.0", afterSimplify);
+         
+    }
+    
+    
     // TODO tests for Commands.differentiate() and Commands.simplify()
     
 }

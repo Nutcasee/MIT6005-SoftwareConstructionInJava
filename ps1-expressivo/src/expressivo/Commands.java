@@ -43,11 +43,11 @@ public class Commands {
         Expression expr = Expression.parse(expression);
         Expression exprAfterSim = expr.simplification(environment);
         System.out.println("exprAfterSim class" + exprAfterSim.getClass());
-        System.out.println("exprAfterSim is: " + exprAfterSim);
+        System.out.println("exprAfterSim is: " + exprAfterSim.toString());
         
-        Expression exprAfterSim2 = Expression.parse(exprAfterSim.toString());
-        System.out.println("exprAfterSim2 class" + exprAfterSim2.getClass());
-        System.out.println("exprAfterSim2 is: " + exprAfterSim2);
+//        Expression exprAfterSim2 = Expression.parse(exprAfterSim.toString());
+//        System.out.println("exprAfterSim2 class" + exprAfterSim2.getClass());
+//        System.out.println("exprAfterSim2 is: " + exprAfterSim2);
 
 //        System.out.println("Double.parseDouble(exprAfterSim.toString()) is: " + Double.parseDouble(exprAfterSim.toString()));
 //        Double valueOfExprInDouble = Double.parseDouble(exprAfterSim.toString());
@@ -57,7 +57,7 @@ public class Commands {
 //            return valueOfExprInDouble.toString();
 //        }
 //        
-        return "";
+        return exprAfterSim.toString();
     }
     
     /* Copyright (c) 2015-2017 MIT 6.005 course staff, all rights reserved.

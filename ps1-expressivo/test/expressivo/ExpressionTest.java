@@ -5,7 +5,9 @@ package expressivo;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -195,6 +197,29 @@ public class ExpressionTest {
          assertEquals(new Multiply(new Plus(new Number("1"), new Number("2")), new Number("3")), exp5);
     }
 
+    @Test
+    public void testDifferentiationMethod() throws Exception {
+        Expression exp = Expression.parse("3 * x");
+       
+        Expression expDiff = exp.differentiation("x");
+        
+         assertEquals(new Plus(new Multiply(new Number("3"), new Number("1")), new Multiply(new Number("0"), new Variable("x"))), expDiff);
+         
+    }
+    
+    @Test
+    public void testSimplificationMethod() throws Exception {
+        Map<String, Double> simMap = new HashMap<>();
+        simMap.put("x", 2.0);
+        simMap.put("y", 1.0);
+        
+        Expression exp = Expression.parse("3");
+       
+        Expression expSim = exp.simplification(simMap);
+        
+         assertEquals(new Number("3"), expSim);
+         
+    }
     
     // Test Expression.parse() "3+3"
 //    @Test

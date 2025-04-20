@@ -1,5 +1,7 @@
 package expressivo;
 
+import java.util.Map;
+
 /*
  * Number is a double, 0 <= number <= Double.MAX_VALUE
  */
@@ -51,5 +53,10 @@ public class Number implements Expression {
     @Override
     public Expression differentiation(String var) {
         return new Number("0");
+    }
+    
+    @Override
+    public Expression simplification(Map<String,Double> environment) {
+        return this;
     }
 }

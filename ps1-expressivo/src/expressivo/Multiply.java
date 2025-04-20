@@ -1,5 +1,7 @@
 package expressivo;
 
+import java.util.Map;
+
 public class Multiply implements Expression {
     private final Expression left;
     private final Expression right;
@@ -42,5 +44,11 @@ public class Multiply implements Expression {
       public Expression differentiation(String var) {
           return new Plus(new Multiply(left, right.differentiation(var)), 
                   new Multiply(left.differentiation(var), right));
+      }
+      
+      @Override
+      public Expression simplification(Map<String,Double> environment) {
+          return new Multiply(left.simplification(environment),
+                  right.simplification(environment));
       }
 }

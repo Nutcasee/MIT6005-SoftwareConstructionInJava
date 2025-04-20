@@ -20,7 +20,14 @@ public class CommandsTest {
         assert false; // make sure assertions are enabled with VM argument: -ea
     }
     
-    
+    @Test
+    public void testDifferentiateMethod() throws Exception {
+        String afterDiff = Commands.differentiate("x", "x");       
+       
+        
+        assertEquals("1", afterDiff);
+         
+    }
     // TODO tests for Commands.differentiate() and Commands.simplify()
     
 }

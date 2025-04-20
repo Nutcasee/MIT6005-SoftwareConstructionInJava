@@ -2,6 +2,7 @@ package expressivo;
 
 import lib6005.parser.*;
 import java.io.File;
+import java.util.Map;
 
 /**
  * An immutable data type representing a polynomial expression of:
@@ -172,6 +173,8 @@ public interface Expression {
 
     
     public Expression differentiation(String var);
+
+    Expression simplification(Map<String, Double> environment);
     
     // TODO more instance methods
     

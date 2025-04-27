@@ -168,11 +168,11 @@ public class MinesweeperServerTest {
         BufferedReader in2 = new BufferedReader(new InputStreamReader(socket2.getInputStream()));
         PrintWriter out2 = new PrintWriter(socket2.getOutputStream(), true);
 
-        System.out.print("in.readLine(): " + in.readLine());
-        System.out.print("in2.readLine(): " + in2.readLine());
+//        System.out.println("in.readLine(): " + in.readLine());
+//        System.out.println("in2.readLine(): " + in2.readLine());
         
-        assertTrue("expected Hello message", in.readLine().startsWith("Welcome"));
-//        assertTrue("expected Hello message", in2.readLine().startsWith("Welcome"));
+        assertTrue("expected Hello message", in.readLine().startsWith("Welcome to Minesweeper"));
+        assertTrue("expected Hello message", in2.readLine().startsWith("Welcome to Minesweeper"));
 //
 //        out.println("look");
 //        

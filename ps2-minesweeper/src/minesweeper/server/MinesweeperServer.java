@@ -91,9 +91,9 @@ public class MinesweeperServer {
         StringBuilder sb = new StringBuilder();
         Formatter formatter = new Formatter(sb);
         
-        formatter.format("Welcome to Minesweeper. Players: %d including you. "
+        formatter.format("Welcome to Minesweeper. Players: xyz including you. "
                 + "Board: %d columns by %d rows. "
-                + "Type 'help' for help.");
+                + "Type 'help' for help.", DEFAULT_SIZE, DEFAULT_SIZE);
         formatter.close();
         out.println(sb.toString());
         

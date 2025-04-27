@@ -30,25 +30,25 @@ public class MinesweeperServerTest {
     private static final String BOARDS_PKG = "minesweeper/server/boards/";
     
     
-    private static Thread startMinesweeperServer(String boardFile) throws IOException {
+    private static Thread startMinesweeperServer() throws IOException {
         PORT = 4000 + new Random().nextInt(1 << 15);
 
-        final URL boardURL = ClassLoader.getSystemClassLoader().getResource(BOARDS_PKG + boardFile);
-
-        if (boardURL == null) {
-            throw new IOException("Fail to locate resource" + boardURL);
-        }
-        String boardPath;
-        try {
-            boardPath = new File(boardURL.toURI()).getAbsolutePath();
-        } catch (URISyntaxException urise) {
-            throw new IOException("Invalid URL " + boardURL, urise); 
-        }
+//        final URL boardURL = ClassLoader.getSystemClassLoader().getResource(BOARDS_PKG + boardFile);
+//
+//        if (boardURL == null) {
+//            throw new IOException("Fail to locate resource" + boardURL);
+//        }
+//        String boardPath;
+//        try {
+//            boardPath = new File(boardURL.toURI()).getAbsolutePath();
+//        } catch (URISyntaxException urise) {
+//            throw new IOException("Invalid URL " + boardURL, urise); 
+//        }
         
         final String[] args = new String[] {
                 "--debug",
-                "--port", Integer.toString(PORT),
-                "--file", boardPath
+                "--port", Integer.toString(PORT)
+//                "--file", boardPath
         };
         Thread serverThread = new Thread(() -> MinesweeperServer.main(args));
         serverThread.start();
@@ -158,61 +158,29 @@ public class MinesweeperServerTest {
     
     @Test(timeout = 10000)
     public void testMultiConnection() throws IOException {
-        Thread thread = startMinesweeperServer("test1.txt");
+        Thread thread = startMinesweeperServer();
         Socket socket = connectToMinesweeperServer(thread);
-//        Socket socket2 = connectToMinesweeperServer(thread);
+        Socket socket2 = connectToMinesweeperServer(thread);
         
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
-//        BufferedReader in2 = new BufferedReader(new InputStreamReader(socket2.getInputStream()));
-//        PrintWriter out2 = new PrintWriter(socket2.getOutputStream(), true);
+        BufferedReader in2 = new BufferedReader(new InputStreamReader(socket2.getInputStream()));
+        PrintWriter out2 = new PrintWriter(socket2.getOutputStream(), true);
 
-
+        System.out.print("in.readLine(): " + in.readLine());
+        System.out.print("in2.readLine(): " + in2.readLine());
+        
         assertTrue("expected Hello message", in.readLine().startsWith("Welcome"));
 //        assertTrue("expected Hello message", in2.readLine().startsWith("Welcome"));
 //
 //        out.println("look");
-//        assertEquals("- - -", in.readLine());
-//        assertEquals("- - -", in.readLine());
-//        assertEquals("- - -", in.readLine());
-//        assertEquals("- - -", in.readLine());
-//
-//        out2.println("look");
-//        assertEquals("- - -", in2.readLine());
-//        assertEquals("- - -", in2.readLine());
-//        assertEquals("- - -", in2.readLine());
-//        assertEquals("- - -", in2.readLine());
-//
-//
-//        out.println("dig 2 0");
-//        assertEquals("- - 1", in.readLine());
-//        assertEquals("- - -", in.readLine());
-//        assertEquals("- - -", in.readLine());
-//        assertEquals("- - -", in.readLine());
 //        
-//        out2.println("dig 2 0");
-//        assertEquals("- - 1", in2.readLine());
-//        assertEquals("- - -", in2.readLine());
-//        assertEquals("- - -", in2.readLine());
-//        assertEquals("- - -", in2.readLine());
-// 
-//        out.println("dig 1 1");
-//        assertEquals("BOOM!", in.readLine());
-//        
-//        out2.println("look"); // out2 should also see the change
-//        out.println("look"); // debug mode is on
-//        assertEquals("     ", in.readLine());
-//        assertEquals("     ", in.readLine());
-//        assertEquals("     ", in.readLine());
-//        assertEquals("     ", in.readLine());
-//       
-//        assertEquals("     ", in2.readLine());
-//        assertEquals("     ", in2.readLine());
-//        assertEquals("     ", in2.readLine());
-//        assertEquals("     ", in2.readLine());
+//        System.out.print("in.readLine() of out.println(look): " + in.readLine());
+//        assertEquals("- - -", in.readLine());
+//        assertEquals("- - -", in.readLine());
 
-        out.println("bye"); 
+//        out.println("bye"); 
         socket.close();
     }
 }

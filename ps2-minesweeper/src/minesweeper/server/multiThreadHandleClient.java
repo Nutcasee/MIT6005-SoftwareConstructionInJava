@@ -1,5 +1,5 @@
 package minesweeper.server;
 
-public class multiThreadHandleClient {
-
+public class multiThreadHandleClient implements Runnable {
+    
 }

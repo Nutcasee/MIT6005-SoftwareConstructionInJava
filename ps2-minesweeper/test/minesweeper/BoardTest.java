@@ -3,6 +3,10 @@
  */
 package minesweeper;
 
+import java.io.File;
+import java.io.IOException;
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 /**

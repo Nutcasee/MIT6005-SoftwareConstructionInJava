@@ -16,7 +16,7 @@ public class Board {
 //    private fiinal Strinng UNTOUCHED = '-';
 //    private fiinal Strinng FLAGGED = 'F';
 
-    private String[][] stateArray;
+    private State[][] stateArray;
     Random random = new Random();
     
     public static enum State {BOMB("B"), DUG(" "), FLAGGED("F"), UNTOUCHED("-"); 
@@ -41,15 +41,15 @@ public class Board {
     public Board(int row, int col) {
         this.row = row;
         this.col = col;
-        this.stateArray = new String[row][col];
+        this.stateArray = new State[row][col];
         
         for (int c = 0; c < col; c++) {
             for (int r = 0; r < row; r++) {
                 if (random.nextDouble() < 0.2) {
-                    stateArray[c][r] = State.BOMB.getSymbol();
+                    stateArray[c][r] = State.BOMB;
 //                    System.out.println("string ofBoard: " + ofBoard);
                 } else {
-                    stateArray[c][r] = State.UNTOUCHED.getSymbol();
+                    stateArray[c][r] = State.UNTOUCHED;
                 }                
             }
         }
@@ -57,14 +57,19 @@ public class Board {
     
 
     public String handleRequest(int c, int r, String message) {
-        String state = stateArray[c][r];
+        State state = stateArray[c][r];
         switch (message) {
             case "dig":
                 if (0 > r | r >= row | 0 > c | c >= col | !state.equals("-")) {
                     return this.toString();
                 } else if (state.equals("-")) {
-                    if (stateState.BOMB)
-                    stateArray[c][r] = State.DUG.getSymbol();
+                    if (state == State.BOMB) {
+                        stateArray[c][r] = State.DUG;
+                        updateBombCount(c,r);
+                        
+                        return "B   O   O   M   !   \n";
+                    }
+                    stateArray[c][r] = State.DUG;
                     
                 }
             case "flag":
@@ -76,6 +81,21 @@ public class Board {
        
         }
     }
+    
+    
+    public int countBombAround(int c, int r) {
+        State state = stateArray[c][r];
+        int countBomb = 0;
+        for (int i = Math.max(c - 1, 0); i < Math.min(c + 1,  col); i++) {
+            for (int j = Math.max(r - 1, 0); j < Math.min(r + 1,  row); j++) {
+                if (stateArray[i][j] == State.BOMB) {
+                    countBomb += 1;
+                }
+            }
+        }
+        return countBomb;
+    }
+
     
     public String handleRequest(String message) {
         switch (message) {
@@ -90,18 +110,7 @@ public class Board {
 //                throw new IllegalArgumentException("Unknown messaage: " + message);       
         }
     }
-    
-//    public int countBomb(int c, int r, String message) {
-//        State state = stateArray[c][r];
-//        int countBomb = 0;
-//        if (state != State.BOMB && state != State.FLAGGED && message.equals("dig")) {
-//            stateArray[c][r] = State.DUG;
-//            
-//            for (int i = Math.max(c - 1,  0); i < )
-//            
-//        }
-//    }
-//    
+        
     
 //    public String message(int r, int c, State s) {
 //        if (0 > r | r > row | 0 > c | c > col | s != State.UNTOUCHED) {
@@ -117,7 +126,7 @@ public class Board {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < col; i++) {
             for (int j = 0; j < row; j++) {
-                sb.append(stateArray[i][j]);
+                sb.append(stateArray[i][j].getSymbol());
             }
             sb.append(System.lineSeparator());
         }

@@ -27,12 +27,15 @@ public class BoardTest {
 //        try {
         Board board = new Board(8, 8);
         String ofBoard = board.toString();
-        String respond = board.handleRequest("hsdflskfjs");
-        String respond2= board.handleRequest("look");
+        String respond = board.handleLookHelpByeRequest("hsdflskfjs");
+        String respond2= board.handleLookHelpByeRequest("look");
+        String respond3= board.handleFlagRequest(3, 1, "flag");
         
         System.out.println("string ofBoard: \n" + ofBoard);
         System.out.println("string respond: \n" + respond);    
-        System.out.println("string respond2: \n" + respond2);    
+        System.out.println("string respond2: \n" + respond2); 
+        System.out.println("string respond3: \n" + respond3);    
+
 //            String row = "- - - - - - -\n";
 //            String expected = "";
 //            for (int i = 0; i < 7; i++) {

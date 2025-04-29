@@ -13,26 +13,31 @@ public class Board {
     private final int row;
     private final int col;
     
-//    private fiinal Strinng UNTOUCHED = '-';
-//    private fiinal Strinng FLAGGED = 'F';
+    private final char UNTOUCHED = '-';
+    private final char FLAGGED = 'F';
+    private final char DUG_NO_BOMB_AROUND = ' ';
+    private char DUG;
+    private boolean BOMB;
 
-    private State[][] stateArray;
+    private char[][] stateArray;
+    private boolean[][] stateArrayBomb;
+    
     Random random = new Random();
     
-    public static enum State {BOMB("B"), DUG(" "), FLAGGED("F"), UNTOUCHED("-"); 
-        private final String symbol; // Field to hold the associated value
-
-        // Constructor to set the value
-        State(String symbol) {
-            this.symbol = symbol;
-        }
-
-        // Getter to retrieve the symbol
-        public String getSymbol() {
-            return symbol;
-        }
-
-    }
+//    public static enum State {BOMB("B"), DUG(" "), FLAGGED("F"), UNTOUCHED("-"); 
+//        private final String symbol; // Field to hold the associated value
+//
+//        // Constructor to set the value
+//        State(String symbol) {
+//            this.symbol = symbol;
+//        }
+//
+//        // Getter to retrieve the symbol
+//        public String getSymbol() {
+//            return symbol;
+//        }
+//
+//    }
     
 //    public Board(File source) {
 //        
@@ -41,41 +46,78 @@ public class Board {
     public Board(int row, int col) {
         this.row = row;
         this.col = col;
-        this.stateArray = new State[row][col];
+        this.stateArray = new char[col][row];
+        this.stateArrayBomb = new boolean[col][row];
         
         for (int c = 0; c < col; c++) {
             for (int r = 0; r < row; r++) {
                 if (random.nextDouble() < 0.2) {
-                    stateArray[c][r] = State.BOMB;
+                    stateArrayBomb[c][r] = true;
 //                    System.out.println("string ofBoard: " + ofBoard);
                 } else {
-                    stateArray[c][r] = State.UNTOUCHED;
-                }                
+                    stateArrayBomb[c][r] = false;
+                }            
+                stateArray[c][r] = UNTOUCHED;
             }
         }
     }
     
+    public String handleDigRequest(int c, int r) {
+        char state = stateArray[c][r];
+        Boolean stateBomb = stateArrayBomb[c][r];
+        
+        if (0 > r || r >= row || 0 > c || c >= col || state != UNTOUCHED) {
+            return this.toString();
+        } 
+        /*
+         * why need to update bomb count in the adjacent squares, since it could give next opponent
+         * unfair advantages... revealing too much infos, and why adjacent squares need to reveal 
+         * itself when nobody clicked it yet... 
+         */
+        if (state == UNTOUCHED) {
+            stateArray[c][r] = DUG;   
+            
+            if (stateBomb) {
+                stateArrayBomb[c][r] = false;                        
+                stateArray[c][r] = (char) ('0' + countBombAround(c,r));
+                return "B   O   O   M   !   \n";
+            }
+            
+            if(countBombAround(c,r) == 0) {
+                stateArray[c][r] = DUG_NO_BOMB_AROUND;                
+            }
+            
+            
+            /*
+             * Converts bomb count to a proper char representation using '0' + countBombAround() instead of casting.
+             * '0' is the ASCII value for '0', which is 48.
+                If countBombAround(c, r) == 3, then:
+                - '0' + 3 → 48 + 3 = 51
+                - 51 corresponds to '3' in ASCII.
+                If countBombAround(c,r) > 9, this approach fails, as it shifts into non-digit ASCII characters.
+                For numbers greater than 9, use String.valueOf(countBombAround(c, r)) instead:
+             */
+            stateArray[c][r] = (char) ('0' + countBombAround(c,r));            
+        }
+        return this.toString();
+    }
+    
 
-    public String handleRequest(int c, int r, String message) {
-        State state = stateArray[c][r];
-        switch (message) {
-            case "dig":
-                if (0 > r | r >= row | 0 > c | c >= col | !state.equals("-")) {
-                    return this.toString();
-                } else if (state.equals("-")) {
-                    if (state == State.BOMB) {
-                        stateArray[c][r] = State.DUG;
-                        updateBombCount(c,r);
-                        
-                        return "B   O   O   M   !   \n";
-                    }
-                    stateArray[c][r] = State.DUG;
-                    
-                }
+    public String handleFlagRequest(int c, int r, String message) {
+        char state = stateArray[c][r];
+        Boolean stateBomb = stateArrayBomb[c][r];
+        
+        switch (message) {            
             case "flag":
-                return "F";
+                if (0 <= r && r < row && 0 <= c && c < col && state == UNTOUCHED) {
+                    stateArray[c][r] = FLAGGED;
+                }
+                return this.toString();
             case "deflag":
-                return "-";
+                if (0 <= r && r < row && 0 <= c && c < col && state == FLAGGED) {
+                    stateArray[c][r] = UNTOUCHED;
+                }
+                return this.toString();
             default:
                 throw new IllegalArgumentException("Unknown state: " + state);
        
@@ -83,21 +125,45 @@ public class Board {
     }
     
     
+    /*Since already excluding the case of (c,r) has BOMB, it supposes to return an accurate count
+     *     
+     */
     public int countBombAround(int c, int r) {
-        State state = stateArray[c][r];
+        Boolean stateBomb = stateArrayBomb[c][r];
         int countBomb = 0;
         for (int i = Math.max(c - 1, 0); i < Math.min(c + 1,  col); i++) {
             for (int j = Math.max(r - 1, 0); j < Math.min(r + 1,  row); j++) {
-                if (stateArray[i][j] == State.BOMB) {
+                if (stateBomb) {
                     countBomb += 1;
+                }
+            }
+        }
+        if (countBomb == 0) {
+            stateArray[c][r] = DUG_NO_BOMB_AROUND;
+            
+            for (int i = Math.max(c - 1, 0); i < Math.min(c + 1,  col); i++) {
+                for (int j = Math.max(r - 1, 0); j < Math.min(r + 1,  row); j++) {
+                    stateArray[i][j] = DUG;
+                    countBombAround(i,j);
                 }
             }
         }
         return countBomb;
     }
 
+    public void updateAround(int c, int r) {
+        Boolean stateBomb = stateArrayBomb[c][r];
+        int countBomb = 0;
+        for (int i = Math.max(c - 1, 0); i < Math.min(c + 1,  col); i++) {
+            for (int j = Math.max(r - 1, 0); j < Math.min(r + 1,  row); j++) {
+                stateArray
+            }
+        }
+        return countBomb;
+    }
     
-    public String handleRequest(String message) {
+    
+    public String handleLookHelpByeRequest(String message) {
         switch (message) {
             case "look":
                 return this.toString();
@@ -126,7 +192,7 @@ public class Board {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < col; i++) {
             for (int j = 0; j < row; j++) {
-                sb.append(stateArray[i][j].getSymbol());
+                sb.append(stateArray[i][j]);
             }
             sb.append(System.lineSeparator());
         }

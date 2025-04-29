@@ -25,7 +25,7 @@ public class BoardTest {
     @Test
     public void testConstructor() throws IOException {
 //        try {
-        Board board = new Board(6, 6);
+        Board board = new Board(8, 8);
         String ofBoard = board.toString();
         String respond = board.handleLookHelpByeRequest("hsdflskfjs");
         String respond2= board.handleLookHelpByeRequest("look");
@@ -41,21 +41,25 @@ public class BoardTest {
         String respond5 = board.handleDigRequest(2, 2);
         System.out.println("string respond5: 2x2 \n" + respond5);    
 
-        String respond82 = board.handleDigRequest(3, 3);
-        System.out.println("string respond82: 4x4 \n" + respond82);   
+//        String respond82 = board.handleDigRequest(3, 3);
+//        System.out.println("string respond82: 4x4 \n" + respond82);   
 
 //        String respond6 = board.handleDigRequest(8, 8);
-//        String respond7 = board.handleDigRequest(4, 4);
+        String respond7 = board.handleDigRequest(4, 4);
+        String respond71 = board.handleDigRequest(4, 4);
+
 //        String respond8 = board.handleDigRequest(3, 3);
         
 //        System.out.println("string ofBoard: \n" + ofBoard);
 //        System.out.println("string respond: \n" + respond);    
 //        System.out.println("string respond2: \n" + respond2); 
 //        System.out.println("string respond3: \n" + respond3);    
-        System.out.println("string respond4: 2x2 \n" + respond4);    
-        System.out.println("string respond5: 2x2 \n" + respond5);    
+//        System.out.println("string respond4: 2x2 \n" + respond4);    
+//        System.out.println("string respond5: 2x2 \n" + respond5);    
 //        System.out.println("string respond6: 8x8 \n" + respond6);    
-//        System.out.println("string respond7: 4x4 \n" + respond7);    
+        System.out.println("string respond7: 4x4 \n" + respond7);   
+        System.out.println("string respond7: 4x4 \n" + respond71);    
+
 //        System.out.println("string respond81: 3x3 \n" + respond81);
 //        System.out.println("string respond82: 4x4 \n" + respond82);   
         

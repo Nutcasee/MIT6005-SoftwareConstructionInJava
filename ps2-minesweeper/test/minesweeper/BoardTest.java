@@ -25,16 +25,26 @@ public class BoardTest {
     @Test
     public void testConstructor() throws IOException {
 //        try {
-        Board board = new Board(8, 8);
+        Board board = new Board(6, 6);
         String ofBoard = board.toString();
         String respond = board.handleLookHelpByeRequest("hsdflskfjs");
         String respond2= board.handleLookHelpByeRequest("look");
-        String respond3= board.handleFlagRequest(3, 1, "flag");
+//        String respond3= board.handleFlagRequest(3, 1, "flag");
         
-        System.out.println("string ofBoard: \n" + ofBoard);
-        System.out.println("string respond: \n" + respond);    
-        System.out.println("string respond2: \n" + respond2); 
-        System.out.println("string respond3: \n" + respond3);    
+        String respond4= board.handleDigRequest(2, 2);
+        String respond5= board.handleDigRequest(2, 2);
+        String respond6= board.handleDigRequest(8, 8);
+        String respond7= board.handleDigRequest(4, 4);
+
+        
+//        System.out.println("string ofBoard: \n" + ofBoard);
+//        System.out.println("string respond: \n" + respond);    
+//        System.out.println("string respond2: \n" + respond2); 
+//        System.out.println("string respond3: \n" + respond3);    
+        System.out.println("string respond4: 2x2 \n" + respond4);    
+        System.out.println("string respond5: 2x2 \n" + respond5);    
+        System.out.println("string respond6: 8x8 \n" + respond6);    
+        System.out.println("string respond7: 4x4 \n" + respond7);    
 
 //            String row = "- - - - - - -\n";
 //            String expected = "";

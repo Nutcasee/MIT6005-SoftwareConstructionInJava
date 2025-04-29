@@ -16,10 +16,10 @@ public class Board {
 //    private fiinal Strinng UNTOUCHED = '-';
 //    private fiinal Strinng FLAGGED = 'F';
 
-    private State[][] stateArray;
+    private String[][] stateArray;
     Random random = new Random();
     
-    public static enum State {BOMB("-"), DUG(" "), FLAGGED("F"), UNTOUCHED("-") 
+    public static enum State {BOMB("B"), DUG(" "), FLAGGED("F"), UNTOUCHED("-"); 
         private final String symbol; // Field to hold the associated value
 
         // Constructor to set the value
@@ -38,39 +38,58 @@ public class Board {
 //        
 //    }
 //    
-    public Board(int row, int col, State[][] s) {
+    public Board(int row, int col) {
         this.row = row;
         this.col = col;
-        this.stateArray = s;     
+        this.stateArray = new String[row][col];
         
-        for (int c = 0; i < col; i++) {
-            for (int r = 0; j < row; j++) {
+        for (int c = 0; c < col; c++) {
+            for (int r = 0; r < row; r++) {
                 if (random.nextDouble() < 0.2) {
-                    stateArray[c][r] = State.BOMB;
+                    stateArray[c][r] = State.BOMB.getSymbol();
+//                    System.out.println("string ofBoard: " + ofBoard);
                 } else {
-                    stateArray[c][r] = State.UNTOUCHED;
+                    stateArray[c][r] = State.UNTOUCHED.getSymbol();
                 }                
             }
         }
     }
     
 
-//    public String handleRequest(int c, int r, String message) {
-//        State state = stateArray[c][r];
-//        switch (message) {
-//            case "look":
-//                return this.toString();
-//            case "dig":
-//                return "This cell has been dug.";
-//            case FLAGGED:
-//                return "F";
-//            case UNTOUCHED:
-//                return "-";
-//            default:
-//                throw new IllegalArgumentException("Unknown state: " + state);
-//       
-//        }
-//    }
+    public String handleRequest(int c, int r, String message) {
+        String state = stateArray[c][r];
+        switch (message) {
+            case "dig":
+                if (0 > r | r >= row | 0 > c | c >= col | !state.equals("-")) {
+                    return this.toString();
+                } else if (state.equals("-")) {
+                    if (stateState.BOMB)
+                    stateArray[c][r] = State.DUG.getSymbol();
+                    
+                }
+            case "flag":
+                return "F";
+            case "deflag":
+                return "-";
+            default:
+                throw new IllegalArgumentException("Unknown state: " + state);
+       
+        }
+    }
+    
+    public String handleRequest(String message) {
+        switch (message) {
+            case "look":
+                return this.toString();
+//            case "help":
+//                return "Help messeage. Plz type look for game status, dig x y for....flag/deflag x y for...";
+            case "bye":
+                return "shouldnt return anything, just terminate connection with user";
+            default:
+                return "Help messeage. Plz type look for game status, dig x y for....flag/deflag x y for...";
+//                throw new IllegalArgumentException("Unknown messaage: " + message);       
+        }
+    }
     
 //    public int countBomb(int c, int r, String message) {
 //        State state = stateArray[c][r];
@@ -96,9 +115,9 @@ public class Board {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int c = 0; i < col; i++) {
-            for (int r = 0; j < row; j++) {
-                sb.append(stateArray[c][r].getSymbol());
+        for (int i = 0; i < col; i++) {
+            for (int j = 0; j < row; j++) {
+                sb.append(stateArray[i][j]);
             }
             sb.append(System.lineSeparator());
         }

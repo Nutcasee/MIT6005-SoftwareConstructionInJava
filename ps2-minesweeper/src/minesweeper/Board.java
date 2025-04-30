@@ -4,7 +4,12 @@
 package minesweeper;
 
 import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * TODO: Specification
@@ -15,6 +20,14 @@ public class Board {
     
     
     // TODO: Specify, test, and implement in problem 2
+    /*
+     * as of now, don't see rep exposure appear from where
+     * 
+     * 2 public methods which mutate Board squares are synchronized (lock1), using 
+     * Object lock1. Supported methods for handleDigRequest() are private, and 
+     * only used by handleDigRequest(), so AS I SUPPOSE (BIG? HAH), so it threadsafes.
+     * CouLD USE Improving Parallelism: Use Cell-Level Locks (from chatGPT kindOf)...
+     */
     private final int row;
     private final int col;
     
@@ -31,6 +44,42 @@ public class Board {
     private final Object lock1 = new Object();
     private final Object lock2 = new Object();
 
+    private static final String BOARDS_PKG = "minesweeper/server/boards/";
+    
+    public Board(File file) {
+        List<String> fileScan = new ArrayList<>();
+        
+     // we create a scanner for reading the file
+        try (Scanner scanner = new Scanner(file) {
+
+            // we read the file until all lines have been read
+            while (scanner.hasNextLine()) {
+                // we read one line
+                String row = scanner.nextLine();
+                fileScan.add(row);
+                // we print the line that we read
+                System.out.println(row);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+        this.row = row;
+        this.col = col;
+        this.stateArray = new char[col][row];
+        this.stateArrayBomb = new boolean[col][row];
+        
+        for (int c = 0; c < col; c++) {
+            for (int r = 0; r < row; r++) {
+                if (random.nextDouble() < 0.25) {
+                    stateArrayBomb[c][r] = true;
+                } else {
+                    stateArrayBomb[c][r] = false;
+                }            
+                stateArray[c][r] = UNTOUCHED;
+            }
+        }
+    }
     
     public Board(int row, int col) {
         this.row = row;

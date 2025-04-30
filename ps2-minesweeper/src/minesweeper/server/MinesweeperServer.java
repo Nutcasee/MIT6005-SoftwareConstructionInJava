@@ -7,6 +7,8 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+import minesweeper.Board;
+
 //import minesweeper.Board;
 
 /**
@@ -42,6 +44,20 @@ public class MinesweeperServer {
         serverSocket = new ServerSocket(port);
         this.debug = debug;
     }
+    
+    public MinesweeperServer(int port, boolean debug, File file) throws IOException {
+        Board newBoard = new Board(file);
+        serverSocket = new ServerSocket(port);
+        this.debug = debug;
+    }
+    
+    public MinesweeperServer(int port, boolean debug, int sizeX, int sizeY) throws IOException {
+        Board newBoard = new Board(sizeX, sizeY);
+        serverSocket = new ServerSocket(port);
+        this.debug = debug;
+    }
+    
+    
 
     /**
      * Run the server, listening for client connections and handling them.
@@ -270,11 +286,15 @@ public class MinesweeperServer {
      * @param port The network port on which the server should listen, requires 0 <= port <= 65535.
      * @throws IOException if a network error occurs
      */
-    public static void runMinesweeperServer(boolean debug, Optional<File> file, int sizeX, int sizeY, int port) throws IOException {
+    public static void runMinesweeperServer(boolean debug, Optional<File> file, int , int sizeY, int port) throws IOException {
         
         // TODO: Continue implementation here in problem 4
+        if (file.isPresent()) {
+            MinesweeperServer server = new MinesweeperServer(port, debug, file);
+        } else if (sizeX > 0 && sizeY > 0) {
+            MinesweeperServer server = new MinesweeperServer(port, debug, int sizeX, int sizeY);
+        }
         
-        MinesweeperServer server = new MinesweeperServer(port, debug);
         server.serve();
     }
 }

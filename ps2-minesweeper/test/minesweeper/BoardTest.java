@@ -25,7 +25,7 @@ public class BoardTest {
     @Test
     public void testConstructor() throws IOException {
 //        try {
-        Board board = new Board(8, 8);
+        Board board = new Board(6, 6);
         String ofBoard = board.toString();
         String respond = board.handleLookHelpByeRequest("hsdflskfjs");
         String respond2= board.handleLookHelpByeRequest("look");

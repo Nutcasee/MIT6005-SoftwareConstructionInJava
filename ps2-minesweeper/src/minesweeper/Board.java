@@ -3,7 +3,10 @@
  */
 package minesweeper;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -47,23 +50,17 @@ public class Board {
     private static final String BOARDS_PKG = "minesweeper/server/boards/";
     
     public Board(File file) {
-        List<String> fileScan = new ArrayList<>();
+        List<String> fileRead = new ArrayList<>();
         
-     // we create a scanner for reading the file
-        try (Scanner scanner = new Scanner(file) {
-
-            // we read the file until all lines have been read
-            while (scanner.hasNextLine()) {
-                // we read one line
-                String row = scanner.nextLine();
-                fileScan.add(row);
-                // we print the line that we read
-                System.out.println(row);
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+        // FileReader assumes the platform's default encoding, 
+        //which might cause issues with special characters.
+        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+            in.lines().forEach(fileRead::add);
+        } catch (IOException e) {
+            System.out.println("can't read file: " + e.getMessage());
         }
         
+        fileRead[0];
         this.row = row;
         this.col = col;
         this.stateArray = new char[col][row];

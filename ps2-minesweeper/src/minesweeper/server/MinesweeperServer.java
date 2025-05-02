@@ -240,6 +240,8 @@ public class MinesweeperServer {
                         }
                     } else if (flag.equals("--size")) {
                         String[] sizes = arguments.remove().split(",");
+                        System.out.println("String[] sizes = arguments.remove().split); " +
+                                Arrays.toString(sizes));
                         sizeX = Integer.parseInt(sizes[0]);
                         sizeY = Integer.parseInt(sizes[1]);
                         file = Optional.empty();
@@ -286,13 +288,20 @@ public class MinesweeperServer {
      * @param port The network port on which the server should listen, requires 0 <= port <= 65535.
      * @throws IOException if a network error occurs
      */
-    public static void runMinesweeperServer(boolean debug, Optional<File> file, int , int sizeY, int port) throws IOException {
+    public static void runMinesweeperServer(boolean debug, Optional<File> file, int sizeX, int sizeY, int port) throws IOException {
         
         // TODO: Continue implementation here in problem 4
-        if (file.isPresent()) {
-            MinesweeperServer server = new MinesweeperServer(port, debug, file);
+        if (port < 0 || port > 65535) {
+            throw new IllegalArgumentException("Invalid port number: " + port);
+        }
+        MinesweeperServer server;
+
+        if (file.isPresent() && file.get().isFile()) {
+            server = new MinesweeperServer(port, debug, file.get());
         } else if (sizeX > 0 && sizeY > 0) {
-            MinesweeperServer server = new MinesweeperServer(port, debug, int sizeX, int sizeY);
+            server = new MinesweeperServer(port, debug, sizeX, sizeY);
+        } else {
+            throw new IllegalArgumentException("Invalid setup.");
         }
         
         server.serve();

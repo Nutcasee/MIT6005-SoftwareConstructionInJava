@@ -6,13 +6,18 @@ package minesweeper;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * TODO: Specification
@@ -49,22 +54,108 @@ public class Board {
 
     private static final String BOARDS_PKG = "minesweeper/server/boards/";
     
-    public Board(File file) {
-        List<String> fileRead = new ArrayList<>();
+    public Board(File file) throws IOException {
+        List<char[]> fileRead = new ArrayList<>();
         
-        // FileReader assumes the platform's default encoding, 
-        //which might cause issues with special characters.
+        /*
+         * InputStreamReader converts bytes to characters, allowing different encodings like UTF-8.
+        ✅ BufferedReader provides efficient buffered reading, reducing disk I/O overhead.
+        ✅ FileInputStream(file) ensures you’re reading from a file instead of standard input (System.in).
+         */
+//        try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) 
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            in.lines().forEach(fileRead::add);
+//            in.lines().forEach(fileRead::add);
+            fileRead = in.lines()
+                    .map(String::toCharArray)
+                    .collect(Collectors.toList()); // Adds all lines at once
+        
+//            System.out.println("fileRead.get(0): " + fileRead.get(0));
         } catch (IOException e) {
-            System.out.println("can't read file: " + e.getMessage());
+            System.err.println("Can't read file: " + e.getMessage());
         }
         
-        fileRead[0];
-        this.row = row;
-        this.col = col;
+        for (char[] row : fileRead) {
+            System.out.println("char[] row : fileRead: " + Arrays.toString(row));
+        }
+        
+        // ✅ Check that the board is not empty
+        if (fileRead.isEmpty()) {
+            throw new IllegalArgumentException("Board file is empty.");
+        }
+        
+        // Parse first line: "X Y"
+        /*
+         *  Problem 2: sizeParts.length != 3 is not reliable
+        A size line like 10 10 would be 5 characters ('1', '0', ' ', '1', '0')
+
+        Or 3 7 would be 3 characters
+
+        You're assuming it's always like "X Y" with single digits, but you should handle multi-digit numbers
+
+        Also, \n or \r do not appear in String::toCharArray() because BufferedReader.lines() already trims them off — you're safe there.
+         */
+        String[] sizeParts = new String(fileRead.get(0)).split("\\s+");
+        if (sizeParts.length != 2) {
+            throw new IllegalArgumentException("First line must specify board size: X SPACE Y NEWLINE");
+        }
+
+        int width, height;
+        try {
+            width = Integer.parseInt(sizeParts[0]);
+            height = Integer.parseInt(sizeParts[1]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid board dimensions: must be integers.");
+        }
+        
+        if (height != fileRead.size() - 1) {
+            throw new IllegalArgumentException("height dimentsions is conflicted");
+        }
+        
+        // ✅ Get expected row length
+        int expectedWidth = fileRead.get(1).length;
+        
+        // ✅ Validate each row
+        for (int i = 1; i < fileRead.size(); i++) {
+            char[] row = fileRead.get(i);
+
+            // Check consistent row length
+            if (row.length != expectedWidth) {
+                throw new IllegalArgumentException("Row " + i + " has inconsistent length.");
+            }
+
+            // Check valid characters
+            for (char c : row) {
+                if (c != '0' && c != '1' & c != ' ') {
+                    throw new IllegalArgumentException("Invalid character '" + c + "' in row " + i + ". Only '.' and '*' allowed.");
+                }
+            }
+        }
+        
+        this.row = width;
+        this.col = height;
         this.stateArray = new char[col][row];
         this.stateArrayBomb = new boolean[col][row];
+        
+        for (int i = 1; i < fileRead.size(); i++) {
+            String[] widthOfFile = new String(fileRead.get(i)).split("\\s+");
+            
+            for (int j = 0; j < width; j++) {
+                try {
+                    int fillInArray = Integer.parseInt(widthOfFile[j]);
+                    if (fillInArray == 0) {
+                        stateArrayBomb[i - 1][j] = false;
+                    } else if (fillInArray == 1) {
+                        stateArrayBomb[i - 1][j] = true;
+                    }
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("Invalid board dimensions: must be integers.");
+                }
+                
+            }
+        }
+        
+        
+        
         
         for (int c = 0; c < col; c++) {
             for (int r = 0; r < row; r++) {

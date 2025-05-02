@@ -19,11 +19,57 @@ public class BoardTest {
     @Test(expected=AssertionError.class)
     public void testAssertionsEnabled() {
         assert false; // make sure assertions are enabled with VM argument: -ea
-    }
+    }  
     
     // TODO: Tests
     @Test
-    public void testConstructor() throws IOException {
+    public void testBoardFile() throws IOException {
+        try {
+            final URL boardURL = ClassLoader.getSystemClassLoader().getResource(BOARDS_PKG + boardFile);
+    
+            if (boardURL == null) {
+                throw new IOException("Fail to locate resource" + boardURL);
+            }
+            String boardPath;
+            try {
+                boardPath = new File(boardURL.toURI()).getAbsolutePath();
+            } catch (URISyntaxException urise) {
+                throw new IOException("Invalid URL " + boardURL, urise); 
+            }
+    
+            Board board = new Board(6, 6);
+            String ofBoard = board.toString();
+            String respond = board.handleLookHelpByeRequest("hsdflskfjs");
+            String respond2= board.handleLookHelpByeRequest("look");
+//        String respond3= board.handleFlagRequest(3, 1, "flag");
+        
+        
+            String respond81 = board.handleDigRequest(3, 3);
+            System.out.println("string respond81: 3x3 \n" + respond81);
+    
+            String respond4 = board.handleDigRequest(2, 2);
+            System.out.println("string respond4: 2x2 \n" + respond4);    
+    
+            String respond5 = board.handleDigRequest(2, 2);
+            System.out.println("string respond5: 2x2 \n" + respond5);    
+            String respond7 = board.handleDigRequest(4, 4);
+            String respond71 = board.handleDigRequest(4, 4);
+    
+
+//            String row = "- - - - - - -\n";
+//            String expected = "";
+//            for (int i = 0; i < 7; i++) {
+//                expected = expected + row;
+//            }
+//            assertEquals(expected.substring(0, expected.length() - 1), board.toString());
+        }
+        catch (IOException ie){
+            throw new IOException("can not load file");
+        }
+    }
+    
+    @Test
+    public void testBoardConstructor() throws IOException {
 //        try {
         Board board = new Board(6, 6);
         String ofBoard = board.toString();

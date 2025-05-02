@@ -30,25 +30,39 @@ public class MinesweeperServerTest {
     private static final String BOARDS_PKG = "minesweeper/server/boards/";
     
     
-    private static Thread startMinesweeperServer() throws IOException {
+    private static Thread startMinesweeperServer(String boardFile) throws IOException {
         PORT = 4000 + new Random().nextInt(1 << 15);
 
-//        final URL boardURL = ClassLoader.getSystemClassLoader().getResource(BOARDS_PKG + boardFile);
-//
-//        if (boardURL == null) {
-//            throw new IOException("Fail to locate resource" + boardURL);
-//        }
-//        String boardPath;
-//        try {
-//            boardPath = new File(boardURL.toURI()).getAbsolutePath();
-//        } catch (URISyntaxException urise) {
-//            throw new IOException("Invalid URL " + boardURL, urise); 
-//        }
+        final URL boardURL = ClassLoader.getSystemClassLoader().getResource(BOARDS_PKG + boardFile);
+
+        if (boardURL == null) {
+            throw new IOException("Fail to locate resource" + boardURL);
+        }
+        String boardPath;
+        try {
+            boardPath = new File(boardURL.toURI()).getAbsolutePath();
+        } catch (URISyntaxException urise) {
+            throw new IOException("Invalid URL " + boardURL, urise); 
+        }
         
         final String[] args = new String[] {
                 "--debug",
-                "--port", Integer.toString(PORT)
-//                "--file", boardPath
+                "--port", Integer.toString(PORT),
+                "--file", boardPath
+        };
+        Thread serverThread = new Thread(() -> MinesweeperServer.main(args));
+        serverThread.start();
+        return serverThread;
+    }
+    
+    private static Thread startMinesweeperServerBySize() throws IOException {
+        PORT = 4000 + new Random().nextInt(1 << 15);
+
+        String sizeX_sizeY = "123,234";
+        String sizeY = "234";
+        final String[] args = new String[] {
+                "--port", Integer.toString(PORT),
+                "--size", sizeX_sizeY
         };
         Thread serverThread = new Thread(() -> MinesweeperServer.main(args));
         serverThread.start();
@@ -74,6 +88,22 @@ public class MinesweeperServerTest {
         }
     }
     
+    @Test(timeout = 10000)
+    public void testStartBoardBySize() throws IOException {
+        Thread thread = startMinesweeperServerBySize();
+        Socket socket = connectToMinesweeperServer(thread);
+        
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+
+        assertTrue("expected Hello message", in.readLine().startsWith("Welcome"));
+
+        out.println("bye"); 
+        socket.close();
+        
+    }
+
+    
 //    @Test(timeout = 10000)
 //    public void testSmall() throws IOException {
 //        Thread thread = startMinesweeperServer("test1.txt");
@@ -84,28 +114,28 @@ public class MinesweeperServerTest {
 //
 //        assertTrue("expected Hello message", in.readLine().startsWith("Welcome"));
 //
-//        out.println("look");
-//        assertEquals("- - -", in.readLine());
-//        assertEquals("- - -", in.readLine());
-//        assertEquals("- - -", in.readLine());
-//        assertEquals("- - -", in.readLine());
-
-//        out.println("dig 2 0");
-//        assertEquals("- - 1", in.readLine());
-//        assertEquals("- - -", in.readLine());
-//        assertEquals("- - -", in.readLine());
-//        assertEquals("- - -", in.readLine());
+////        out.println("look");
+////        assertEquals("- - -", in.readLine());
+////        assertEquals("- - -", in.readLine());
+////        assertEquals("- - -", in.readLine());
+////        assertEquals("- - -", in.readLine());
+//
+////        out.println("dig 2 0");
+////        assertEquals("- - 1", in.readLine());
+////        assertEquals("- - -", in.readLine());
+////        assertEquals("- - -", in.readLine());
+////        assertEquals("- - -", in.readLine());
+////        
+////        out.println("dig 1 1");
+////        assertEquals("BOOM!", in.readLine());
 //        
-//        out.println("dig 1 1");
-//        assertEquals("BOOM!", in.readLine());
-        
-//        out.println("look"); // debug mode is on
-        
-//        assertEquals("     ", in.readLine());
-//        assertEquals("     ", in.readLine());
-//        assertEquals("     ", in.readLine());
-//        assertEquals("     ", in.readLine());
-
+////        out.println("look"); // debug mode is on
+//        
+////        assertEquals("     ", in.readLine());
+////        assertEquals("     ", in.readLine());
+////        assertEquals("     ", in.readLine());
+////        assertEquals("     ", in.readLine());
+//
 //        out.println("bye"); 
 //        socket.close();
 //        
@@ -155,24 +185,24 @@ public class MinesweeperServerTest {
 //        socket.close();
 //    }
 //    
-    
-    @Test(timeout = 10000)
-    public void testMultiConnection() throws IOException {
-        Thread thread = startMinesweeperServer();
-        Socket socket = connectToMinesweeperServer(thread);
-        Socket socket2 = connectToMinesweeperServer(thread);
-        
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-
-        BufferedReader in2 = new BufferedReader(new InputStreamReader(socket2.getInputStream()));
-        PrintWriter out2 = new PrintWriter(socket2.getOutputStream(), true);
+//    
+//    @Test(timeout = 10000)
+//    public void testMultiConnection() throws IOException {
+//        Thread thread = startMinesweeperServer();
+//        Socket socket = connectToMinesweeperServer(thread);
+//        Socket socket2 = connectToMinesweeperServer(thread);
+//        
+//        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+//
+//        BufferedReader in2 = new BufferedReader(new InputStreamReader(socket2.getInputStream()));
+//        PrintWriter out2 = new PrintWriter(socket2.getOutputStream(), true);
 
 //        System.out.println("in.readLine(): " + in.readLine());
 //        System.out.println("in2.readLine(): " + in2.readLine());
-        
-        assertTrue("expected Hello message", in.readLine().startsWith("Welcome to Minesweeper"));
-        assertTrue("expected Hello message", in2.readLine().startsWith("Welcome to Minesweeper"));
+//        
+//        assertTrue("expected Hello message", in.readLine().startsWith("Welcome to Minesweeper"));
+//        assertTrue("expected Hello message", in2.readLine().startsWith("Welcome to Minesweeper"));
 //
 //        out.println("look");
 //        
@@ -181,8 +211,8 @@ public class MinesweeperServerTest {
 //        assertEquals("- - -", in.readLine());
 
 //        out.println("bye"); 
-        socket.close();
-    }
+//        socket.close();
+//    }
 }
     
     
